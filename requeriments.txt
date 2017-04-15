@@ -36,6 +36,4 @@ librabbitmq
 django-taggit
 django-cors-headers
 celery
-
-django-imagekit
-#psycopg2
+psycopg2
