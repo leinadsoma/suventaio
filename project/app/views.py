@@ -202,7 +202,7 @@ def user_form(request, action):
 					user.username = request.user.company.name.lower() + '_' + user.visible_username
 					user.save()
 					form.save_m2m()
-					return HttpResponseRedirect(reverse('product_attributes', args=[product_attrs.product.slug]))
+					return HttpResponseRedirect(reverse('change_password', args=[user.id]))
 		elif action == 'edit':
 			user = User.objects.get(id=request.GET.get('id'))
 			form = UserForm(instance=user)
