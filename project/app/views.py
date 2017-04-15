@@ -90,7 +90,7 @@ def index(request):
 				return HttpResponseRedirect(reverse('select_sellpoint'))
 			else:
 				if request.user.profile == 'Vendedor' or request.user.profile == 'Vendedor autorizado para cobrar':
-					return HttpResponseRedirect(reverse('vendor', args=[request.user.sell_point.all()[0].slug])+'?id='+request.user.sell_point.all()[0].id)
+					return HttpResponseRedirect(reverse('vendor', args=[request.user.sell_point.all()[0].slug])+'?id='+str(request.user.sell_point.all()[0].id))
 
 def invoice(request):
 	form = InvoiceClientForm()
