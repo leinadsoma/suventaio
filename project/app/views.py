@@ -86,7 +86,11 @@ def index(request):
 		if request.user.profile == 'Administrador' or request.user.is_superuser:
 			return render(request, 'app/index.html',locals())
 		elif request.user.profile == 'Cajero' or request.user.profile == 'Vendedor' or request.user.profile == 'Vendedor autorizado para cobrar':
-			return render(request, 'app/index.html',locals())
+			if len(request.user.sell_point.all()) > 1:
+				return HttpResponseRedirect(reverse('select_sellpoint'))
+			else:
+				if request.user.profile == 'Vendedor' or request.user.profile == 'Vendedor autorizado para cobrar':
+					return HttpResponseRedirect(reverse('vendor', args=[request.user.sell_point[0].slug])+'id='+request.user.sell_point[0].id)
 
 def invoice(request):
 	form = InvoiceClientForm()
