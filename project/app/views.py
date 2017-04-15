@@ -477,10 +477,9 @@ def product_attributes(request, slug):
 	if request.user.profile == 'Administrador' or request.user.is_superuser:
 		product = Product.objects.get(id=request.GET.get('id'), slug=slug)
 		product_attrs = Product_attrs.objects.filter(product=product)
-		if request.user.company == product_attrs.sell_point.company or request.user.is_superuser:
-			return render(request, 'app/product_attributes.html',locals())
-		else:
-			raise Http404
+		
+		return render(request, 'app/product_attributes.html',locals())
+		
 	else:
 		raise Http404
 
