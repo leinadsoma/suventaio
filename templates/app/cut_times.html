@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Horas de Corte | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+            <a href="{%url 'cut_time_form' sellpoint.slug%}?id={{sellpoint.id}}" class="btn bgm-black btn-sm waves-effect pull-right">
+                <i class="fa fa-plus"></i> AGREGAR HORA DE CORTE
+            </a>
+            <a href="{%url 'sellpoints_cut'%}" class="btn bgm-black btn-sm waves-effect pull-right" style="margin-right:10px;">
+                <i class="fa fa-arrow-left"></i> REGRESAR
+            </a>
+                <h2>Horas de Corte<br /> <h4>{{sellpoint}}</h4></h2>
+                <p> 
+                    <small>Esta es la lista de cortes en el sistema por cada punto de venta</small>
+                </p>
+                {%if sellpoint%}
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>HORA</th>
+                                    <th>ACCIONES
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>HORA</th>
+                                    <th>-</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for object in cuttime%}
+                                    <tr>
+                                        <td>{{object.time}}</td>
+                                        <td>
+                                            <a href="{%url 'cut_time_form' sellpoint.slug%}?id={{sellpoint.id}}&delete={{object.id}}" class="btn btn-xs btn bgm-red waves-effect">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                {%else%}
+                    <br />
+                        <strong>No hay puntos de venta dados de alta</strong> 
+                    <br /> 
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
+{% endblock %}

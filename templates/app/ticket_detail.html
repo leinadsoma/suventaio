@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Ticket | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <button class="btn bgm-black btn-sm waves-effect pull-right print_ticket" style="">
+                    <i class="fa fa-print" aria-hidden="true"></i> IMPRIMIR TICKET
+                </button>
+                <a href="{%url 'cut_details'%}?id={{ticket.cut.id}}" class="btn bgm-black btn-sm waves-effect pull-right" style="margin-right: 10px;">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> REGRESAR
+                </a>
+                <h3>FOLIO: {{ticket.sellpoint_code}}</h3>
+                <h5>FOLIO GENERAL: {{ticket.company_code}}</h5>
+                <h5>CODIGO: {{ticket.secret_code}}</h5>
+                <h5>ESTATUS: {{ticket.status}}</h5>
+                <div id="ticket_area">
+                    <table width="248" HEIGHT="50" border="0" align="center" style="background-color: white">
+                        <tr>
+                            <td align="center" style="font-size:20px;">
+                                <strong>TOTAL: $<span id="grand_total">{{ticket.total|intcomma}}</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="line-height:13px; " align="center">
+                                <strong><span id="ticket_sellpoint">{{ticket.sell_point.name}}</span></strong><br />
+                                {%if ticket.sell_point.rfc%}RFC: <span id="ticket_rfc">{{ticket.sell_point.rfc}}</span><br />{%endif%}
+                                <small><span id="ticket_date">{{ticket.date}}</span></small><br />
+                                {%if ticket.sell_point.address_1%}<small><span style="font-size:11px;" id="ticket_address1">{{ticket.sell_point.address_1}}</span></small><br />{%endif%}
+                                {%if ticket.sell_point.address_2%}<small><span style="font-size:11px;" id="ticket_address2">{{ticket.sell_point.address_2}}</span></small><br />{%endif%}
+                                {%if ticket.sell_point.address_3%}<small><span style="font-size:11px;" id="ticket_address3">{{ticket.sell_point.address_3}}</span></small><br />{%endif%}
+                                {%if ticket.sell_point.email%}<small><span style="font-size:11px;" id="ticket_email">{{ticket.sell_point.email}}</span></small><br />{%endif%}
+                                {%if ticket.sell_point.phone%}<small><span style="font-size:11px;" id="ticket_phone">{{ticket.sell_point.phone}}</span></small><br />{%endif%}
+                            </td>
+                        </tr>
+                    </table>
+                    <table  width="248" border="1" align="center" style="line-height:15px; background-color: white">
+                        <thead>
+                            <tr>
+                                <th width="1%">
+                                    <span>Cant.</span>
+                                </th>
+                                <th>
+                                    <span>Prod.</span>
+                                </th>
+                                <th width="13%">
+                                    <span>$</span>
+                                </th>
+                                <th width="20%">
+                                    <span>Total</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="total-label" colspan="3" align="right">
+                                    <div class="text-right">Subtotal:</div>
+                                </th>
+                                <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                    $ {{ticket.subtotal}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="total-label" colspan="3" align="right">
+                                    <div class="text-right">Iva:</div>
+                                </th>
+                                <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                    $ {{ticket.taxes}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="total-label" colspan="3" align="right">
+                                    <div class="text-right">Total:</div>
+                                </th>
+                                <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                    $ {{ticket.total}}
+                                </th>
+                            </tr>
+                        </tfoot>
+                        <tbody id="table_ticket">
+                            {%for obj in ticket.ticket_products%}
+                            <tr>
+                                <td align="right">
+                                    <span style="font-size:10px;">{{obj.quantity}}</span>
+                                </td>
+                                <td align="center">
+                                    <span style="font-size:10px;">{{obj.alias}}</span>
+                                </td>
+                                <td align="left">
+                                    <span style="font-size:10px;">${{obj.price|intcomma}}</span>
+                                </td>
+                                <td align="left">
+                                    <span style="font-size:10px;">${{obj.total}}</span>
+                                </td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                    <table  width="248" border="0" align="center" style="line-height:13px; background-color: white">
+                        <tr align="center">
+                            <td>
+                                <img id="barcode" style="margin-top:3px;">
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>
+                                <span id="ticket_user">le atendio: {{ticket.user.visible_username}}<br /></span>
+                                <span id="ticket_user">folio: <span id="ticket_code">{{ticket.sellpoint_code}}</span><br /></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'js/JsBarcode.all.min.js'%}"></script>
+    <script src="{%static 'js/code128.js'%}"></script>
+    <script src="{%static 'js/print_this.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        JsBarcode("#barcode", 1{{ticket.sellpoint_code}}, {
+          format: "ean13",
+          lineColor: "#000",
+          width:2,
+          height:40,
+          displayValue: false,
+        });
+        $( ".print_ticket" ).click(function(event) {
+            $('#ticket_area').printThis();
+        });
+    });
+</script>
+{% endblock %}

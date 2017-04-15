@@ -1,0 +1,43 @@
+{% extends "base_login.html" %}
+
+{% load i18n %} 
+{% load account %}
+{% load staticfiles i18n %}
+{% load socialaccount %}
+
+{% block title %} Registro | {{apptitle}} {% endblock title %}
+
+{% block content %}
+    <div style="width: 300px;margin:auto;">
+        <form id="form" method="post" enctype="multipart/form-data" class="m-t" style="margin-bottom:15px">{% csrf_token %}
+            <span class="" style="background-color: #565656;">{{message_username}}</span>
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Usuario" value="{{username}}">
+            </div>
+            <span class="" style="background-color: #565656;">{{message_email}}</span>
+            <div class="form-group">
+                <input type="text" class="form-control" name="email" placeholder="Email" value="{{email}}">
+            </div>
+            <span class="" style="background-color: #565656;">{{message_password}}</span>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password_" placeholder="Contraseña otra vez">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="input_account" name="account" value="{{account}}">
+            </div>
+            <div class="row">
+                <div class="col-xs-7">
+                    <button type="submit" class="btn btn-facebook pull-center btn-block" name="signup">Crear cuenta</button>
+                </div>
+                <div class="col-xs-5">
+                    <a href="{%url 'user_login'%}" class="pull-right" style="color:#fff"><small>Ya tengo una cuenta</small></a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
+                        

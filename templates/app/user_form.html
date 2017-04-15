@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}{%if action == 'edit'%}Editar{%else%}Nuevo{%endif%} Usuario | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/chosen/chosen.css'%}" rel="stylesheet">
+    <link href="{%static 'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'%}" rel="stylesheet">
+    
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                {%if action == 'edit'%}
+                    <a href="{%url 'user_form' 'delete'%}?id={{user.id}}" class="btn bgm-red waves-effect pull-right">
+                        <i class="fa fa-trash"></i> ELIMINAR USUARIO
+                    </a>
+                {%endif%}
+                <div class="col-sm-7">
+                    <h2>{%if action == 'edit'%}EDITAR{%else%}NUEVO{%endif%} USUARIO</h2>
+                    <hr />
+                    <div class="card">
+                        <form id="form" method="post" enctype="multipart/form-data" class="form-group">{% csrf_token %}
+                            <div class="modal-body">
+                                {{ form|crispy }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" onclick="window.history.back()" class="btn btn-link" >Cancelar</button>
+                                <button type="submit" name="" class="btn bgm-black waves-effect"><i class="fa fa-save"></i> Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/chosen/chosen.jquery.js'%}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="{%static 'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'%}"></script>
+    
+    <script src="{%static 'js/es_validate.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })
+        $("#form").validate({
+            errorClass: "has-error",
+            lang: 'es',
+            rules: {
+                username: {
+                    required : true,
+                },
+                email:{
+                    email : true,
+                },
+                departamento:{
+                    required : true,
+                },
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
+    </script>
+{% endblock %}

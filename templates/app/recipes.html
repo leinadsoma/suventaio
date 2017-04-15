@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Receta | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <a href="{%url 'recipe_form' 'add'%}?id={{product.id}}" class="btn bgm-black btn-sm waves-effect pull-right">
+                    <i class="fa fa-plus"></i> AGREGAR PRODUCTO
+                </a>
+                <a href="{%url 'products'%}" class="btn bgm-black btn-sm waves-effect pull-right" style="margin-right: 10px;">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> REGRESAR
+                </a>
+                <h2>RECETA DEL PRODUCTO</h2>
+                <h4>{{product.name}}</h4>
+                <p>
+                    <small>Productos que componen este producto, cuando se venda este producto tambien sus componentes se restaran de inventario.</small>
+                </p>
+                {%if product.image%}
+                    <img alt="image" class="img-circle" src="{{MEDIA_URL}}{{product.logo}}" style="width:50px;margin-right: 50px;">
+                {%else%}
+                    <img alt="image" class="img-circle" src="{%static 'img/default-profile.jpg'%}" style="width:50px;margin-right: 50px;">
+                {%endif%}
+                
+                {%if recipes%}
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped">
+                           <thead>
+                                <tr>
+                                    <th>Cantidad</th>
+                                    <th>Producto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Cantidad</th>
+                                    <th>Producto</th>
+                                    <th>-</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for object in recipes%}
+                                    <tr>
+                                        <td>
+                                            {{object.quantity}}
+                                        </td>
+                                        <td>
+                                            {{object.product.name}}
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'recipe_form' 'delete'%}?id={{product.id}}&recipe={{object.id}}" class="btn btn-xs btn bgm-red waves-effect">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                {%else%}
+                    <p style="margin-top:20px;">
+                        <strong>No hay receta para este producto</strong>
+                    </p>
+                {%endif%}
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
+{% endblock %}

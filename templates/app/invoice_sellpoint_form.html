@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Editar Facturación | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/chosen/chosen.css'%}" rel="stylesheet">
+    <link href="{%static 'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'%}" rel="stylesheet">
+    
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="col-sm-8">
+                    <h2>EDITAR FACTURACIÓN</h2>
+                    <hr />
+                    <div class="card">
+                        <form id="form" method="post" enctype="multipart/form-data" class="form-group">{% csrf_token %}
+                            <div class="modal-body">
+                                {{ form|crispy }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" onclick="window.history.back()" class="btn btn-link" >Cancelar</button>
+                                <button type="submit" name="" class="btn bgm-black waves-effect"><i class="fa fa-save"></i> Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/chosen/chosen.jquery.js'%}"></script>
+    <script src="{%static 'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'%}"></script>
+    <script src="{%static 'js/validate.js'%}"></script>
+    <script src="{%static 'js/es_validate.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        
+    });
+    </script>
+{% endblock %}

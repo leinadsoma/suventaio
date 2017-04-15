@@ -1,0 +1,196 @@
+{% extends "base_login.html" %}
+{% load i18n %} 
+{% load account %}
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %} Facturación {% endblock title %}
+
+{% block style %}  
+.has-error{
+    color:#f15656;;
+}
+{% endblock %}
+
+{%block logo_title%}
+    <!-- Heading -->
+    <h1 class="heading heading_lg" style="margin-bottom: 24px; margin-top:40px;font-size:30px;">
+        Facturacion en Línea
+    </h1>
+{%endblock%}
+
+{% block content %}
+    <div style="max-width: 500px;margin:auto;width: 100%;">
+        <form method="post" id="form" enctype="multipart/form-data" class="m-t" style="margin-bottom:55px">
+        {% csrf_token %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>Ingresa todos los campos para poder convertir tu ticket en factura<p>
+                    <div id="div_id_folio" class="form-group">
+                        <label for="id_folio" class="control-label  requiredField">
+                            FOLIO<span class="asteriskField">*</span> </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_folio" maxlength="250" name="folio" type="text" required />
+                            <p id="hint_id_rfc" class="help-block">Numero de Ticket</p>
+                        </div>
+                    </div>
+                     <div id="div_id_key" class="form-group">
+                        <label for="id_key" class="control-label  requiredField">
+                            KEY<span class="asteriskField">*</span> </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_key" maxlength="250" name="key" type="text" required />
+                            <p id="hint_id_key" class="help-block">Key, se encuentra en la parte inferior del ticket</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div id="div_id_rfc" class="form-group">
+                        <label for="id_rfc" class="control-label  requiredField">
+                            RFC<span class="asteriskField">*</span> </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_rfc" maxlength="250" name="rfc" type="text" required />
+                            <p id="hint_id_rfc" class="help-block">RFC de la empresa</p>
+                        </div>
+                    </div>
+                    <div id="div_id_razon_social" class="form-group">
+                        <label for="id_razon_social" class="control-label  requiredField">
+                            Razon social<span class="asteriskField">*</span> </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_razon_social" maxlength="250" name="razon_social" type="text" required />
+                            <p id="hint_id_razon_social" class="help-block">Razón social de la empresa</p>
+                        </div>
+                    </div>
+                    <div id="div_id_telefono" class="form-group">
+                        <label for="id_telefono" class="control-label ">
+                            Teléfono
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_telefono" maxlength="250" name="telefono" type="text" /> </div>
+                    </div>
+                    <div id="div_id_contacto" class="form-group">
+                        <label for="id_contacto" class="control-label  requiredField">
+                            Nombre de contacto<span class="asteriskField">*</span> </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_contacto" maxlength="250" name="contacto" type="text" required />
+                            <p id="hint_id_contacto" class="help-block">Nombre del contacto que requiere la factura</p>
+                        </div>
+                    </div>
+                    <div id="div_id_email_contacto" class="form-group">
+                        <label for="id_email_contacto" class="control-label  requiredField">
+                            Email de contacto<span class="asteriskField">*</span> </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_email_contacto" maxlength="250" name="email_contacto" type="text" required />
+                            <p id="hint_id_email_contacto" class="help-block">Email para enviar la factura timbrada</p>
+                        </div>
+                    </div>
+                    <div id="div_id_calle" class="form-group">
+                        <label for="id_calle" class="control-label ">
+                            Calle
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_calle" maxlength="250" name="calle" type="text" /> 
+                        </div>
+                    </div>
+                    <div id="div_id_numero_exterior" class="form-group">
+                        <label for="id_numero_exterior" class="control-label ">
+                            Numero exterior
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_numero_exterior" maxlength="250" name="numero_exterior" type="text" /> 
+                        </div>
+                    </div>
+                    <div id="div_id_numero_interior" class="form-group">
+                        <label for="id_numero_interior" class="control-label ">
+                            Numero interior
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_numero_interior" maxlength="250" name="numero_interior" type="text" /> 
+                        </div>
+                    </div>
+                    <div id="div_id_colonia" class="form-group">
+                        <label for="id_colonia" class="control-label ">
+                            Colonia
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_colonia" maxlength="250" name="colonia" type="text" /> 
+                        </div>
+                    </div>
+                    <div id="div_id_municipio_o_delegacion" class="form-group">
+                        <label for="id_municipio_o_delegacion" class="control-label ">
+                            Delegación o Municipio
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_municipio_o_delegacion" maxlength="250" name="municipio_o_delegacion" type="text" /> 
+                        </div>
+                    </div>
+                    <div id="div_id_estado" class="form-group">
+                        <label for="id_estado" class="control-label ">
+                            Estado
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_estado" maxlength="250" name="estado" type="text" /> 
+                        </div>
+                    </div>
+                    <div id="div_id_codigo_postal" class="form-group">
+                        <label for="id_codigo_postal" class="control-label ">
+                            Codigo Postal
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_codigo_postal" maxlength="250" name="codigo_postal" type="text" /> 
+                        </div>
+                    </div>
+                    <div id="div_id_pais" class="form-group">
+                        <label for="id_pais" class="control-label ">
+                            País
+                        </label>
+                        <div class="controls ">
+                            <input class="textinput textInput form-control" id="id_pais" maxlength="250" name="pais" type="text" /> 
+                        </div>
+                    </div>
+                    <a href="/" class="btn btn-login btn-lg" style="margin-top: 0px;">CANCELAR</a>
+                    <button type="submit" name="login" class="btn btn-facebook btn-lg" style="margin-top: 0px; margin-left:20px;">FACTURAR TICKET</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'js/validate.js'%}"></script>
+    <script src="{%static 'js/es_validate.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })
+        $("#form").validate({
+            errorClass: "has-error",
+            lang: 'es',
+            rules: {
+                folio: {
+                    required : true,
+                },
+                key: {
+                    required : true,
+                },
+                rfc: {
+                    required : true,
+                },
+                razon_social: {
+                    required : true,
+                },
+                contacto: {
+                    required : true,
+                },
+                email_contacto: {
+                    required : true,
+                },
+            },
+            submitHandler: function(form) {
+                form.submit();
+            } 
+        });
+    });
+    </script>
+{% endblock %}
+                        

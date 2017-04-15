@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Puntos de venta | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <button class="btn bgm-black btn-sm waves-effect pull-right print_cut" style="">
+                    <i class="fa fa-print" aria-hidden="true"></i> IMPRIMIR CORTE
+                </button>
+                {%if not cut.terminate%}
+                    <button class="btn bgm-black btn-sm waves-effect pull-right make_cut" style="margin-right: 10px;">
+                        <i class="fa fa-cut" aria-hidden="true"></i> CORTAR
+                    </button>
+                {%endif%}
+                <a href="{%url 'cuts' cut.sell_point.slug%}?id={{cut.sell_point.id}}" class="btn bgm-black btn-sm waves-effect pull-right" style="margin-right: 10px;">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> REGRESAR
+                </a>
+                <h3>TOTAL: $ {{cut.total|intcomma}}</h3>
+                <h4>IVA: $ {{cut.total_taxes|intcomma}}</h4>
+                <h4>Clientes: {{cut.len_tickets}}</h4>
+                <p> 
+                    {{cut.init_time}} a {{cut.last_time}}
+                </p>
+                {%if products_array%}
+                    <div id="ticket_area">
+                        <table width="248" border="0" align="center">
+                            <tr>
+                                <td align="center" style="font-size:25px;">
+                                    <strong>TOTAL: $ {{total|intcomma}}</strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <table  width="248" border="1" align="center" style="line-height:15px;">
+                            <thead>
+                                <tr>
+                                    <th width="1%">
+                                        <span>Cant.</span>
+                                    </th>
+                                    <th>
+                                        <span>Prod.</span>
+                                    </th>
+                                    <th width="13%">
+                                        <span>$</span>
+                                    </th>
+                                    <th width="20%">
+                                        <span>Total</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th class="total-label" colspan="3" align="right">
+                                        <div class="text-right">Subtotal:</div>
+                                    </th>
+                                    <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                        $ {{subtotal}}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="total-label" colspan="3" align="right">
+                                        <div class="text-right">Iva:</div>
+                                    </th>
+                                    <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                        $ {{taxes}}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="total-label" colspan="3" align="right">
+                                        <div class="text-right">Total:</div>
+                                    </th>
+                                    <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                        $ {{total}}
+                                    </th>
+                                </tr>
+                            </tfoot>
+                            <tbody id="table_ticket">
+                                {%for obj in products_array%}
+                                <tr>
+                                    <td align="right">
+                                    <span style="font-size:10px;">{{obj.quantity}}</span>
+                                    </td>
+                                    <td align="center">
+                                    <span style="font-size:10px;">{{obj.alias}}</span>
+                                    </td>
+                                    <td align="left">
+                                    <span style="font-size:10px;">${{obj.price|intcomma}}</span>
+                                    </td>
+                                    <td align="left">
+                                    <span style="font-size:10px;">${{obj.total}}</span>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3 style="margin-top:30px;">TICKETS DEL CORTE</h3>
+                    <table id="data-table" class="table table-striped">
+                       <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Vendedor</th>
+                                <th>Estatus</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Factura</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Vendedor</th>
+                                <th>Estatus</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Factura</th>
+                                <th>-</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {%for object in tickets%}
+                                <tr>
+                                    <td>
+                                        1{{object.sellpoint_code}}
+                                    </td>
+                                    <td>
+                                        {{object.user.visible_username}}
+                                    </td>
+                                    <td>
+                                        {{object.status}}
+                                    </td>
+                                    <td>
+                                        {{object.date|date:"SHORT_DATE_FORMAT"}}
+                                    </td>
+                                    <td>
+                                        ${{object.total|intcomma}}
+                                    </td>
+                                    <td>
+                                        {%if object.invoice%}
+                                            <i class="fa fa-check" style="color:#8BC34A"></i>
+                                        {%else%}
+                                            <i class="fa fa-times" style="color:#f44336"></i>
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        <a href="{%url 'ticket_detail' object.id%}" class="btn btn-xs btn bgm-black waves-effect">
+                                            <i class="fa fa-eye"></i> Ver
+                                        </a>
+                                    </td>
+                                </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                {%else%}
+                    <br />
+                        <strong>No hay tickets asignados a este corte</strong> 
+                    <br /> 
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{%static 'js/print_this.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $('#data-table').DataTable({
+            "order": [[ 0, "desc" ]]
+        });
+        $( ".print_cut" ).click(function(event) {
+            $('#ticket_area').printThis();
+        });
+        $( ".make_cut" ).click(function(event) {
+            event.preventDefault();
+            var data = {
+                'make_cut': true,
+            };
+            $.ajax({
+                url : "{%url 'cut_details'%}?id={{cut.id}}", 
+                type : "POST", 
+                dataType: "json",
+                data : data,
+                success : function(json) {
+                    swal("Cortado con exito!", "", "success")
+                    setTimeout(function() 
+                    {
+                        location.reload();
+                    }, 2000);
+                },
+                error : function(xhr,errmsg,err) {
+                    alert(' Ocurrio un error')
+                    console.log(xhr.status + ": " + xhr.responseText); 
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

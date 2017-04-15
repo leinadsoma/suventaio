@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Mis Productos | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <a href="{%url 'product_form' 'add'%}" class="btn bgm-black btn-sm waves-effect pull-right">
+                    <i class="fa fa-plus"></i> AGREGAR PRODUCTO
+                </a>
+                <h2>MIS PRODUCTOS</h2>
+                <p>
+                    <small>Esta es la lista de todos los puntos de venta dados de alta en el sistema tienes un limite de</small>
+                </p>
+                {%if products%}
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped">
+                           <thead>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th>Nombre</th>
+                                    <th>Unidades</th>
+                                    <th>Receta</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th>Nombre</th>
+                                    <th>Unidades</th>
+                                    <th>Receta</th>
+                                    <th>-</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for object in products%}
+                                    <tr>
+                                        <td>
+                                            {%if object.image%}
+                                                <a href="{%url 'product_form' 'edit'%}?id={{object.id}}" class="edit_sell_points" sellpoint="{{object.id}}" style="color: inherit;">
+                                                    <img alt="image" src="{{MEDIA_URL}}{{object.logo}}" style="width:30px;">
+                                                </a>
+                                            {%else%}
+                                                <a href="{%url 'product_form' 'edit'%}?id={{object.id}}" class="edit_sell_points" sellpoint="{{object.id}}" style="color: inherit;">
+                                                    <img alt="image" src="{%static 'img/default-profile.jpg'%}{{object.logo}}" style="width:30px;">
+                                                </a>
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'product_form' 'edit'%}?id={{object.id}}" class="edit_sell_points" sellpoint="{{object.id}}" style="color: inherit;">{{object.name}} </a>
+                                        </td>
+
+                                        <td>
+                                            {{object.quantity}} {{object.units}}
+                                        </td>
+                                        <td>
+                                            {%if object.recipe.all %}
+                                                {%for product_recipe in object.recipe.all  %}
+                                                    <small>
+                                                        <span style="font-size:11px;">{{product_recipe.product.full_name}}</span><br />
+                                                    </small>
+                                                {%endfor%}
+                                            {%else%}
+                                                -
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'product_attributes' object.slug%}?id={{object.id}}" class="btn btn-xs btn bgm-black waves-effect" style="margin-right:10px;">
+                                                <i class="fa fa-cubes" aria-hidden="true"></i>
+                                                SUCURSALES ({{object.len_sell_points}})
+                                            </a>
+                                            <a href="{%url 'product_form' 'edit'%}?id={{object.id}}" class="btn btn-xs btn bgm-black waves-effect">
+                                                <i class="fa fa-eye"></i> VER
+                                            </a>
+                                            <br />
+                                            <a href="{%url 'recipes' object.slug%}?id={{object.id}}" class="btn btn-xs btn bgm-black waves-effect" style="margin-top:5px;">
+                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i> RECETA ({{object.len_recipe}})
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                {%else%}
+                    <br />
+                    <strong>Aun no tienes productos dados de alta </strong>
+                    <br /> 
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
+{% endblock %}

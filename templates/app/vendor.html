@@ -1,0 +1,960 @@
+    {% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load mptt_tags %}
+
+{% block title %}
+    Vendedor | {{apptitle}}
+{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/chosen/chosen.css'%}" rel="stylesheet">
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+    <link href="{%static 'css/sweetalert2.min.css'%}" rel="stylesheet">    
+{% endblock %}
+
+{% block style %}  
+    #main {
+        padding-bottom: 110px;
+        padding-top: 80px;
+    }
+    #content:not(.content-alt) {
+        padding-left: 247px;
+        padding-right: 15px;
+    }
+    .card .card-header .btn-float {
+        right: 25px;
+        bottom: -6px;
+        z-index: 1;
+    }
+    .card .card-header {
+        padding: 15px 115px 15px 15px;
+    }
+    .card .card-body.card-padding {
+        padding: 0px 0px;
+    }
+    .dw-item {
+        min-height: 0px;
+    }
+    .list-group .list-group-item {
+        padding: 0px 0px;
+    }
+    .keyboard_col{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .keyboard_row {
+        margin-left: 0px!important;
+        margin-right: 0px!important;
+    }
+    .form-control, output {
+        color: #fff;
+        font-size:15px;
+        font-weight: bold;
+    }
+    .form-control {
+        width: 100%;
+        height: 35px;
+        padding: 6px 12px;
+        background-color: transparent;
+        border: 1px solid #bfbfbf;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+    }
+
+    .form-control:focus {
+        border-color: #fff!important;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6)
+    }
+
+    .form-control:read-only {
+        background-color: transparent;
+        border-color: #fff!important;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6)
+    }
+
+    .form-control::-moz-placeholder {
+        color: #fff;
+        opacity: 1
+    }
+
+    .form-control:-ms-input-placeholder {
+        color: #fff;
+    }
+
+    .form-control::-webkit-input-placeholder {
+        color: #fff;
+    }
+
+    .card {
+        position: relative;
+        background: #fff;
+        margin-bottom: 10px;
+        border-radius: 2px;
+    }
+    .profile-view .pv-body {
+        margin-top: 15px;
+        padding: 0 0px 0px;
+    }
+    .profile-view .pv-header {
+        position: relative;
+        height: 6px;
+        width: 100%;
+        background-image: url();
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: center;
+    }
+    .grid-item-keyboard{
+        width:314px;
+        max-height:288px;
+    }
+    .grid-item-product{
+        width: 153px;
+        height: 75px;
+    }
+    #content:not(.content-alt) {
+        padding-left: 247px;
+        padding-right: 0px;
+    }
+    .profile-view .pv-body {
+        margin-top: 0px;
+        padding: 0 0px 0px;
+        height: 60px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .card-units{
+        font-size: 10px;
+        bottom: 4px;
+        left: 10px;
+        position: absolute;
+    }
+    .card-price{
+        font-size: 15px;
+        bottom: 4px;
+        right: 10px;
+        position: absolute;
+    }
+    .card-title{
+        font-size: 17px!important;
+        font-weight:500!important;
+        margin-top: 3px!important;
+        margin-bottom:2px!important;
+        font-weight: 500!important;
+    }
+    .btn-card{
+        white-space: normal;
+        padding: 2px 2px;
+        text-transform: none;
+    }
+    @media print
+    {
+        body {display:none;}
+    }
+    @media screen {
+       .print {display:block!important;}
+    }
+    
+{% endblock %}
+
+{%block menu%}
+    {% recursetree my_menus %}
+        <li class="{% if not node.is_leaf_node %} sub-menu{%endif%}" menu="{{ node.id }}">
+            <a class="menu-btn" {% if not node.is_leaf_node %}data-ma-action="submenu-toggle"{%endif%} menu="{{ node.id }}">
+            <i class="fa fa-circle" style="color:{{ node.color }};font-size: 18px!important;"></i> <strong style="color:#4C4C4C">{{ node.name }}</strong>
+            </a>
+            {% if not node.is_leaf_node %}
+                <ul>
+                    {{ children }} 
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+{%endblock%}
+
+{%block header_menu%}
+    <li>
+        <a href="{%url 'select_sellpoint'%}"><strong style="margin-right: 10px;">PUNTOS DE VENTA</strong> 
+        <i class="fa fa-bullseye" style="font-size:20px;margin-right: 40px;"></i></a>
+    </li>
+{%endblock%}
+
+{% block content %}
+    <div class="row grid" style="margin-left: 15px;margin-right: 15px;">
+        <div class="card grid-item grid-item-keyboard" style="background-color: #607d8b;">
+            <div class="card-header bgm-bluegray">
+                <div class="keyboard_div">
+                    <input id="quantity" type="text" class="form-control input-sm" placeholder="CANTIDAD" readonly>
+                    <button class="btn bgm-teal btn-float waves-effect button_menu" style="background-color: #5e9c96!important;">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="menu_div">
+                    <p style="color:#fff; margin-bottom: 12px;">
+                        <strong style="font-size:16px;">Selecciona una opción</strong>
+                    </p>
+                    <button class="btn bgm-teal btn-float waves-effect button_keyboard" style="background-color: #5e9c96!important;">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </div>
+                <div class="dynamic_price_div">
+                    <input id="dynamic_price" type="text" class="form-control input-sm" placeholder="PRECIO DINAMICO" readonly>
+                    <button class="btn bgm-teal btn-float waves-effect button_keyboard" style="background-color: #5e9c96!important;">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body card-padding">
+                <div class="keyboard_div">
+                    <div id="site-visits" class="dw-item bgm-teal" style="background-color: rgb(72, 100, 113)!important;">
+                        <div class="list-group lg-even-white">
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row"> 
+                                    <a href="" class="btn-keyboard" value="1">
+                                        <div class="col-xs-4 keyboard_col">
+                                            <h4 style="color:white;text-align: center;">1</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="2">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">2</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="3">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">3</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row">  
+                                    <a href="" class="btn-keyboard" value="4">
+                                        <div class="col-xs-4 keyboard_col">
+                                            <h4 style="color:white;text-align: center;">4</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="5">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">5</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="6">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">6</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row">  
+                                    <a href="" class="btn-keyboard" value="7">
+                                        <div class="col-xs-4 keyboard_col">
+                                            <h4 style="color:white;text-align: center;">7</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="8">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">8</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="9">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">9</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row">  
+                                    <a href="" class="btn-keyboard" value="trash">
+                                        <div class="col-xs-4 keyboard_col" style="background-color:rgba(255, 0, 0, 0.3);">
+                                            <h4 style="color:white;text-align: center;"><i class="fa fa-trash"></i></h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="0">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">0</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-keyboard" value="dynamic_price">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;"><i class="fa fa-usd"></i></h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dynamic_price_div">
+                    <div id="site-visits" class="dw-item bgm-teal" style="background-color: rgb(72, 100, 113)!important;">
+                        <div class="list-group lg-even-white">
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row"> 
+                                    <a href="" class="btn-dynamic" value="1">
+                                        <div class="col-xs-4 keyboard_col">
+                                            <h4 style="color:white;text-align: center;">1</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value="2">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">2</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value="3">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">3</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row">  
+                                    <a href="" class="btn-dynamic" value="4">
+                                        <div class="col-xs-4 keyboard_col">
+                                            <h4 style="color:white;text-align: center;">4</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value="5">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">5</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value="6">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">6</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row">  
+                                    <a href="" class="btn-dynamic" value="7">
+                                        <div class="col-xs-4 keyboard_col">
+                                            <h4 style="color:white;text-align: center;">7</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value="8">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">8</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value="9">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">9</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row">  
+                                    <a href="" class="btn-dynamic" value="00">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">00</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value="0">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">0</h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="btn-dynamic" value=".">
+                                        <div class="col-xs-4 keyboard_col"> 
+                                            <h4 style="color:white;text-align: center;">.</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_div">
+                    <div id="site-visits" class="dw-item bgm-teal" style="background-color: rgb(72, 100, 113)!important;">
+                        <div class="list-group lg-even-white">
+                            <div class="list-group-item media sv-item">
+                                <div class="row keyboard_row"> 
+                                    <a href="" class="">
+                                        <div class="col-xs-6 keyboard_col view_last_tickets">
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">Ver Tickets</h4>
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">
+                                                <i class="fa fa-tags fa-2x"></i>
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="">
+                                        <div class="col-xs-6 keyboard_col">
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">Pagar Anticipo</h4>
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">
+                                                <i class="fa fa-usd fa-2x"></i>
+                                            </h4>
+                                        </div>
+                                    </a>
+                                     <a href="" class="">
+                                        <div class="col-xs-6 keyboard_col">
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">Pago con Tarjeta</h4>
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">
+                                                <i class="fa fa-credit-card fa-2x"></i>
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <a href="" class="">
+                                        <div class="col-xs-6 keyboard_col">
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">Hacer Corte</h4>
+                                            <h4 style="color:white;text-align: center;font-weight: 300;">
+                                                <i class="fa fa-cut fa-2x"></i>
+                                            </h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-default btn-card card profile-view grid-item grid-item-product print_ticket" product="'+value.pk+'">
+            <div class="pv-header" style="background-color:'+value.fields.color_menu+'">
+            </div>
+            <div class="pv-body">
+            <h2 class="card-title">$<span id="total_price">0.0</span></h2>
+                <span class="card-units" style="font-size:12px;"><strong id="total_quantity">0</strong> productos</span>
+                <span class="card-price">
+                    <i class="fa fa-print fa-2x"></i>
+                </span>
+            </div>
+        </button>
+        <div class="grid-item">
+            {%comment%}
+            <button class="btn bgm-blue btn-icon waves-effect waves-circle waves-float" style="width: 60px;height: 60px;margin-bottom: 15px;margin-top: 10px;margin-left: 10px;margin-right: 4px;">
+                <i class="fa fa-print fa-3x" style="font-size: 30px;margin-top:8px;"></i>
+            </button>
+            <button class="btn bgm-indigo btn-icon waves-effect waves-circle waves-float" style="width: 60px;height: 60px;margin-bottom: 15px;margin-top: 10px;margin-left: 4px;margin-right: 4px;">
+                <i class="fa fa-star fa-3x" style="font-size: 30px;margin-top:8px;"></i>
+            </button>
+            {%endcomment%}
+        </div>
+    </div>
+
+    <div class="modal" data-modal-color="red" id="modalColor" data-backdrop="static"data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">CANCELAR TICKET</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Estas apunto de cancelar todo el ticket, y empezar uno de nuevo.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link pull-left" data-dismiss="modal">
+                        CERRAR
+                    </button>
+                    <button class="btn bgm-black waves-effect waves-float delete_ticket">
+                        ELIMINAR TICKET
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalTickets" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ultimos Tickets</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span>Folio</span>
+                                    </th>
+                                    <th>
+                                        <span>Total</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="my_tickets">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link pull-left" data-dismiss="modal">
+                        CERRAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" data-modal-color="red" id="modalColor" data-backdrop="static"data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div id="ticket_area">
+                <table width="248" HEIGHT="50" border="0" align="center">
+                    <tr>
+                        <td align="center" style="font-size:20px;">
+                            <strong>TOTAL: $<span id="grand_total"></span></strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:13px; " align="center">
+                            <strong><span id="ticket_sellpoint">{{sell_point.name}}</span></strong><br />
+                            {%if sell_point.rfc%}RFC: <span id="ticket_rfc">{{sell_point.rfc}}</span><br />{%endif%}
+                            <small><span id="ticket_date"></span></small><br />
+                            {%if sell_point.address_1%}<small><span style="font-size:11px;" id="ticket_address1">{{sell_point.address_1}}</span></small><br />{%endif%}
+                            {%if sell_point.address_2%}<small><span style="font-size:11px;" id="ticket_address2">{{sell_point.address_2}}</span></small><br />{%endif%}
+                            {%if sell_point.address_3%}<small><span style="font-size:11px;" id="ticket_address3">{{sell_point.address_3}}</span></small><br />{%endif%}
+                            {%if sell_point.email%}<small><span style="font-size:11px;" id="ticket_email">{{sell_point.email}}</span></small><br />{%endif%}
+                            {%if sell_point.phone%}<small><span style="font-size:11px;" id="ticket_phone">{{sell_point.phone}}</span></small><br />{%endif%}
+                        </td>
+                    </tr>
+                </table>
+                <div class="especial">
+                    <table  width="248" border="1" align="center" style="line-height:15px;">
+                        <thead>
+                            <tr>
+                                <th width="1%">
+                                    <span>Cant.</span>
+                                </th>
+                                <th>
+                                    <span> Prod.</span>
+                                </th>
+                                <th width="13%">
+                                    <span> $</span>
+                                </th>
+                                <th width="20%">
+                                    <span>Total</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="total-label" colspan="3" align="right">
+                                    <div class="text-right">Subtotal:</div>
+                                </th>
+                                <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                    $ <span id="ticket_subtotal"></span><br />
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="total-label" colspan="3" align="right">
+                                    <div class="text-right">Iva:</div>
+                                </th>
+                                <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                    $ <span id="ticket_iva"></span><br />
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="total-label" colspan="3" align="right">
+                                    <div class="text-right">Total:</div>
+                                </th>
+                                <th class="total-amount" colspan="1" align="right" style="font-size:10px;">
+                                    $ <span id="ticket_total"></span><br />
+                                </th>
+                            </tr>
+                        </tfoot>
+                        <tbody id="table_ticket">
+                        </tbody>
+                    </table>
+                    <table  width="248" border="0" align="center" style="line-height:13px; ">
+                        <tr align="center">
+                            <td>
+                                <img id="barcode" style="margin-top:3px;">
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>
+                                <span id="ticket_user">le atendio: {{request.user.visible_username}}<br /></span>
+                                <span id="ticket_user">folio: <span id="ticket_code"></span><br /></span>
+                                {%if sell_point.invoice%}
+                                    {%if sell_point.domain%}
+                                        <small>Key: <strong><span id="ticket_key"></span></strong></small><br />
+                                    {%endif%}
+                                {%endif%}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{%block footer%}
+    <footer id="footer">
+        <img src="{%static 'img/logo_bg.png'%}" style="width: 150px;">
+        <p>Powered by ZaresDelWeb &copy; {{now.date.year}}</p>
+    </footer>
+{%endblock footer%}
+
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/chosen/chosen.jquery.js'%}"></script>
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{%static 'js/sweetalert2.min.js'%}"></script>
+    <script src="{%static 'js/masonry.js'%}"></script>
+    <script src="{%static 'js/print_this.js'%}"></script>
+    <script src="{%static 'js/moment.js'%}"></script>
+    <script src="{%static 'js/moment_es.js'%}"></script>
+    <script src="{%static 'js/JsBarcode.all.min.js'%}"></script>
+    <script src="{%static 'js/code128.js'%}"></script>
+    <script src="{%static 'vendors/bootstrap-growl/bootstrap-growl.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8" async defer>
+
+    $( document ).ready(function() {
+
+        $('.menu_div').hide()
+        $('.dynamic_price_div').hide()
+
+        var products_display = []
+        var ticket = []
+
+        var $grid = $('.grid').masonry({
+            isFitWidth: true,
+            itemSelector: '.grid-item',
+            columnWidth: 153,
+            gutter: 8
+        });
+
+        function add_product(product_id, quantity,  price, alias, taxes){
+            quantity = parseInt(quantity)
+            total_product = 0
+            total_price = 0
+            flag = true
+            $.each( ticket , function( i, value ){
+                if (product_id == value['product_id']){
+                    if (price == value['price']){
+                        value['quantity'] += quantity
+                        flag = false
+                    }
+                }
+                total_price += (value['quantity'] * value['price'])
+                total_product += value['quantity']
+            });
+            if (flag){
+                ticket.push({
+                    product_id: product_id,
+                    quantity: quantity,
+                    price: price,
+                    alias: alias,
+                    taxes: taxes,
+                });
+                total_price += (quantity * price)
+                total_product += quantity
+            }
+            $('#total_price').text(total_price.toFixed(2))
+            $('#total_quantity').text(total_product)
+        }
+
+        $( ".delete_ticket" ).click(function(event) {
+            $('#modalColor').modal('hide');
+            delete_ticket()
+        });
+
+        function delete_ticket(){
+            $('#modalColor').modal('hide');
+            ticket = []
+            $('#total_price').text('0.00')
+            $('#total_quantity').text('0')
+        }
+
+        function make_ticket(is_order){
+            anticipe = 0
+            if (is_order){
+                anticipe = $("#anticipe").val()
+            }
+            if (ticket.length >= 1){
+                var data = {
+                    'ticket': JSON.stringify(ticket),
+                    'anticipe': anticipe,
+                    'is_order': is_order,
+                    'make_ticket': true,
+                };
+                $.ajax({
+                    url : "{%url 'vendor' sell_point.slug%}?id={{sell_point.id}}", 
+                    type : "POST", 
+                    dataType: "json",
+                    data : data,
+                    success : function(json) {
+                        $('#ticket_subtotal').text(parseFloat(json.total).toFixed(2))
+                        $('#ticket_iva').text(parseFloat(json.taxes).toFixed(2))
+                        $('#ticket_total').text(parseFloat(json.subtotal).toFixed(2))
+                        $('#ticket_code').text(json.code)
+                        $('#ticket_key').text(json.key)
+                        $('#grand_total').text(parseFloat(json.total).toFixed(2))
+                        $('#table_ticket').empty()
+                        $.each( ticket , function( i, value ){
+                            ttotal = (parseFloat(value['price']) * value['quantity'] ).toFixed(2)
+                            html = ''+
+                            '<tr>'+
+                                '<td align="right">'+
+                                    '<span style="font-size:11px;">'+value['quantity']+'</span>'+
+                                '</td>'+
+                                '<td align="center">'+
+                                    '<span style="font-size:11px;">'+value['alias']+'</span>'+
+                                '</td>'+
+                                '<td align="left">'+
+                                    '<span style="font-size:11px;">'+value['price']+'</span>'+
+                                '</td>'+
+                                '<td align="left">'+
+                                    '<span style="font-size:11px;">'+ttotal+'</span>'+
+                                '</td>'+
+                            '</tr>';
+                            $('#table_ticket').append(html)
+                        });
+                        $('#ticket_date').text(moment(Date.now()).format('MM/DD/YYYY h:mm a'))
+                        ccode = String("1000000000000" + json.code).slice(-12);
+                        JsBarcode("#barcode", ccode, {
+                          format: "ean13",
+                          lineColor: "#000",
+                          width:2,
+                          height:40,
+                          displayValue: false,
+                        });
+                        $('#ticket_area').printThis();
+                        delete_ticket()
+                    },
+                    error : function(xhr,errmsg,err) {
+                        alert('Ocurrio un error')
+                        console.log(xhr.status + ": " + xhr.responseText); 
+                    }
+                });
+            }
+        }
+
+        $( ".view_last_tickets" ).click(function(event) {
+            event.preventDefault();
+            var data = {
+                'last_tickets': true,
+            };
+            $.ajax({
+                url : "{%url 'vendor' sell_point.slug%}?id={{sell_point.id}}", 
+                type : "POST", 
+                dataType: "json",
+                data : data,
+                success : function(json) {
+                    $('#my_tickets').empty()
+                    last_tickets = JSON.parse(json.tickets)
+                    $.each( last_tickets , function( i, value ){
+                        ccode = String("1000000000000" + value.fields.code_sellpoint).slice(-12);
+                        html = ''+
+                        '<tr>'+
+                            '<td align="center">'+
+                                '<span style="font-size:11px;">'+ccode+'</span>'+
+                            '</td>'+
+                            '<td align="center">'+
+                                '<span style="font-size:11px;">$ '+(value.fields.total).toFixed(2)+'</span>'+
+                            '</td>'+
+                        '</tr>';
+                        $('#my_tickets').append(html)
+                    });
+                    
+                    $("#modalTickets").modal("show")
+                },
+                error : function(xhr,errmsg,err) {
+                    alert('Ocurrio un error')
+                    console.log(xhr.status + ": " + xhr.responseText); 
+                }
+            });
+        });
+
+        $( ".print_ticket" ).click(function(event) {
+            make_ticket(false)
+        });
+
+        $( ".button_menu" ).click(function(event) {
+            $('.keyboard_div').hide(300)
+            $('.menu_div').show(300)
+            $grid.masonry();
+        });
+
+        $( ".button_keyboard" ).click(function(event) {
+            $('.menu_div').hide(300)
+            $('.dynamic_price_div').hide(300)
+            $('.keyboard_div').show(300)
+            $grid.masonry();
+        });
+
+        $( ".btn-keyboard" ).click(function(event) {
+            event.preventDefault();
+            action = $(this).attr('value')
+            if(action == 'trash'){
+                $('#modalColor').modal('show');
+            }
+            else if(action == 'dynamic_price'){
+                $('.keyboard_div').hide(300)
+                $('.dynamic_price_div').show(300)
+                $grid.masonry();
+            }
+            else{
+                value = $("#quantity").val() + $(this).attr('value')
+                $("#quantity").val(value)
+            }
+        });
+
+        $( ".btn-dynamic" ).click(function(event) {
+            event.preventDefault();
+            action = $(this).attr('value')
+            value = $("#dynamic_price").val() + $(this).attr('value')
+            if (!$.isNumeric( value ))
+                value = ''
+            $("#dynamic_price").val(value)
+        });
+
+        $( "#quantity" ).click(function(event) {
+            $("#quantity").val('')
+        });
+
+        $( "#dynamic_price" ).click(function(event) {
+            $("#dynamic_price").val('')
+        });
+
+        function notification(text1, text2, type, delay, icon){
+            $.growl({
+                icon: icon,
+                title: ' '+text1,
+                message: ' '+text2,
+                url: ''
+            },{
+                    element: 'body',
+                    type: type,
+                    allow_dismiss: true,
+                    placement: {
+                        from: 'bottom',
+                        align: 'right'
+                    },
+                    offset: {
+                        x: 20,
+                        y: 85
+                    },
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: delay,
+                    timer: 1000,
+                    url_target: '_blank',
+                    mouse_over: false,
+                    animate: {
+                            enter: 'animated fadeIn',
+                            exit: 'animated fadeOut'
+                    },
+                    icon_type: 'class',
+                    template: '' +
+                        '<div data-growl="container" class="alert" role="alert">' +
+                            '<button type="button" class="close" data-growl="dismiss">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '<span class="sr-only">Close</span>' +
+                            '</button>' +
+                            '<span data-growl="icon"></span>' +
+                            '<span data-growl="title"></span>' +
+                            '<span data-growl="message"></span>' +
+                            '<a href="#" data-growl="url"></a>' +
+                        '</div>'
+            });
+        }
+
+        $(document).on('click', '.btn-product', function() {
+            quantity = $("#quantity").val()
+            if (quantity == '')
+                quantity = 1
+            $("#quantity").val('')
+            product_id = $(this).attr('product')
+            dynamic_price = $("#dynamic_price").val()
+            alias = $(this).attr('alias')
+            taxes = $(this).attr('taxes')
+            if (dynamic_price){
+                if ($(this).attr('dynamic_price') == 'true'){
+                    price = dynamic_price
+                    notification(quantity + ' ' + alias, '$ '+ (price*quantity), 'inverse', 2500, 'fa fa-check')
+                }
+                else{
+                    price = $(this).attr('price')
+                    notification('ESTE PRODUCTO NO ES DINAMICO', 'Se marcó con el precio recomendado.', 'warning', 2500, 'fa fa-exclamation-triangle')
+                }
+                $("#dynamic_price").val('')
+            }
+            else{
+                price = $(this).attr('price')
+                notification(quantity + ' ' + alias, '$ '+ (price*quantity), 'inverse', 2500, 'fa fa-check')
+            }
+            $('.menu_div').hide(300)
+            $('.dynamic_price_div').hide(300)
+            $('.keyboard_div').show(300)
+            $grid.masonry();
+            add_product(product_id, quantity, price, alias, taxes)
+        });
+
+        $( ".menu-btn" ).click(function(event) {
+            event.preventDefault();
+            var data = {
+                'get_products': true,
+                'menu': $(this).attr('menu'),
+            };
+            $.ajax({
+                url : "{%url 'vendor' sell_point.slug%}?id={{sell_point.id}}", 
+                type : "POST", 
+                dataType: "json",
+                data : data,
+                success : function(json) {
+                    $.each( products_display , function( i, value ){
+                        $grid.masonry( 'remove', value )
+                    });
+                    products_display = []
+                    products = JSON.parse(json.products)
+                    $.each( products , function( i, value ){
+                        html = '' +
+                        '<button class="btn btn-default btn-card card profile-view grid-item grid-item-product btn-product" product="'+value.pk+'" alias="'+value.fields.alias+'" price="'+value.fields.price+'" taxes="'+value.fields.taxes+'"';
+                            if(value.fields.dynamic_price)
+                                html += 'dynamic_price="true"';
+                            else 
+                                html += 'dynamic_price="false"';
+                            html += ' >' +
+                            '<div class="pv-header" style="background-color:'+value.fields.color_menu+'">' +
+                            '</div>' +
+                            '<div class="pv-body">' +
+                                '<h2 class="card-title">'+value.fields.name+'</h2>' +
+                                '<span class="card-units">'+value.fields.quantity+' '+value.fields.units+'</span>' +
+                                '<span class="card-price">'; 
+                                if(value.fields.dynamic_price)
+                                    html += '<i class="fa fa-circle" style="font-size: 12px;margin-right: 5px;color: #e8e843;"></i>';
+                                html += value.fields.format_price+'</span>' +
+                            '</div>' +
+                        '</button>';
+                        $('#content_products').empty()
+                        var $item = $( html );
+                        products_display.push($item)
+                        $grid.append( $item ).masonry( 'appended', $item );
+                        $grid.masonry();
+                        Waves.attach('.btn:not(.btn-icon):not(.btn-float)');
+                        Waves.attach('.btn-icon, .btn-float', ['waves-circle', 'waves-float']);
+                        Waves.init();
+                    });
+                },
+                error : function(xhr,errmsg,err) {
+                    alert('Ocurrio un error')
+                    console.log(xhr.status + ": " + xhr.responseText); 
+                }
+            });
+        });
+
+    });
+    </script>
+{% endblock %}

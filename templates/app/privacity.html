@@ -1,0 +1,41 @@
+{% extends "base_login.html" %}
+
+{% load i18n %} 
+{% load account %}
+{% load staticfiles i18n %}
+{% load socialaccount %}
+
+{% block title %} Privacidad | {{apptitle}} {% endblock title %}
+
+{%block style%}
+.heading_lg{
+    margin-top: 20px!important;
+}
+{%endblock%}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Politicas de privacidad</h1>
+            <p>Actualizado al {{now.date}}</p>
+        </div>
+    </div>
+    <div class="row features-block" style="text-align: justify">
+        <div class="col-lg-8 col-lg-offset-2 features-text wow fadeInLeft">
+            <p>En {{apptitle}} estamos conscientes de la importancia de la privacidad de nuestros usuarios y como consecuencia estamos comprometidos con proteger la misma. Por lo anterior, y en virtud de nuestras políticas de privacidad que aplicamos a todos nuestros servicios, mismas que podrán ser consultadas en la página en Internet <a href="www.suventa.io/policy/">https://www.suventa.io/privacity/</a>, en la que se incluye una descripción de cómo tratamos los datos personales y patrimoniales de nuestros usuarios (los “Datos Personales”), mismos que son utilizados para integrar su expediente como usuario, (ii) prestar los servicios que hayan sido contratados, (iii) ofrecerle servicios de {{apptitle}}, de sus afiliadas, socios comerciales, comisionistas o empresas integrantes del mismo grupo al que llegase a pertenecer {{apptitle}}, (iv) atender quejas y aclaraciones, y (v) realizar evaluaciones y estudios de mercado.</p>
+
+            <p>Tomaremos las medidas contenidas en la Ley Federal de Protección de Datos Personales en Posesión de Particulares y demás leyes aplicables para (i) que los terceros a los que les sean revelados los Datos Personales, proporcionen una adecuada protección de los mismos, e (ii) impedir el acceso no autorizado a los Datos Personales o cualquier modificación, divulgación o destrucción no autorizada de los mismos. Lo anterior, en el entendido que facilitaremos a los terceros a los que les sean revelados los Datos Personales, el presente aviso de privacidad proporcionado a nuestros clientes, por lo que el tratamiento de los Datos Personales por los terceros se hará conforme a lo establecido en este aviso de privacidad. De igual manera, el tercero receptor, asumirá las mismas obligaciones que correspondan a {{apptitle}} en materia de confidencialidad y protección de los Datos Personales.</p>
+
+            <p>Este aviso de privacidad podrá ser modificado unilateralmente. No obstante lo anterior, {{apptitle}} comunicará a sus clientes las modificaciones a través de (i) correo electrónico,  publicación de dichas modificaciones en la página de Internet <a href="www.suventa.io/policy/">https://www.suventa.io/privacity/</a>. Le pedimos a nuestros clientes que revisen regularmente el presente Aviso de Privacidad publicado en dicha página de Internet.</p>
+
+            <p>Ponemos a disposición de nuestros clientes la dirección de correo electrónico contacto@tcguniverces.com, en la cual, con gusto atenderemos (i) las dudas relativas al uso de sus Datos Personales, y/o (ii) las solicitudes para ejercer sus derechos al acceso, rectificación, cancelación y oposición relativos al uso y almacenamiento de sus Datos Personales en posesión de {{apptitle}}.</p>
+
+            <p> Al proporcionar sus Datos Personales, el cliente confirma y acepta que ha leído y otorga su consentimiento para ajustarse a lo estipulado en el presente Aviso de Privacidad.</p>
+
+            <br />
+            <a href="/" class="btn btn-login" style="margin-bottom:60px">Regresar a {{apptitle}}</a>
+        </div>
+    </div>
+{% endblock content %}
+                        

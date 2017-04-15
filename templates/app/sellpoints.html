@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Puntos de venta | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <a href="{%url 'sellpoint_form' 'add'%}" class="btn bgm-black btn-sm waves-effect pull-right">
+                    <i class="fa fa-plus"></i> AGREGAR PUNTO DE VENTA
+                </a>
+                <h2>MIS PUNTOS DE VENTA</h2>
+                <p>
+                    <small>Esta es la lista de todos los puntos de venta dados de alta en el sistema tienes un limite de: <strong>{{request.user.company.sell_point_limits}}</strong></small>
+                </p>
+                {%if pvs%}
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>LOGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>DÍA DE CORTE</th>
+                                    <th>SALDO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>LOGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>DÍA DE CORTE</th>
+                                    <th>SALDO</th>
+                                    <th>-</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for object in pvs%}
+                                    <tr>
+                                        <td>
+                                            {%if object.logo%}
+                                                <a href="{%url 'sellpoint_form' 'edit'%}?id={{object.id}}" class="edit_sell_points" sellpoint="{{object.id}}" style="color: inherit;">
+                                                    <img alt="image" src="{{MEDIA_URL}}{{object.logo}}" style="width:30px;">
+                                                </a>
+                                            {%else%}
+                                                <a href="{%url 'sellpoint_form' 'edit'%}?id={{object.id}}" class="edit_sell_points" sellpoint="{{object.id}}" style="color: inherit;">
+                                                    <img alt="image" src="{%static 'img/default-profile.jpg'%}{{object.logo}}" style="width:30px;">
+                                                </a>
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'sellpoint_form' 'edit'%}?id={{object.id}}" class="edit_sell_points" sellpoint="{{object.id}}" style="color: inherit;">{{object.name}} </a>
+                                        </td>
+                                        <td>{{object.pay_date|date:"SHORT_DATE_FORMAT"}}</td>
+                                        <td>{{object.cost|intcomma}}</td>
+                                        <td>
+                                            <a href="{%url 'sellpoint_form' 'edit'%}?id={{object.id}}" class="btn btn-xs btn bgm-black waves-effect">
+                                                <i class="fa fa-eye"></i> VER
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                {%else%}
+                    <br />
+                    <strong>Aun no tienes puntos de venta dados de alta</strong> 
+                    <br /> 
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
+{% endblock %}

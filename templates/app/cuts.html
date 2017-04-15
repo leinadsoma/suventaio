@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Cortes | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <a href="{%url  'sellpoints_cut'%}" class="btn bgm-black btn-sm waves-effect pull-right" style="margin-right: 10px;">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> REGRESAR
+                </a>
+                <h2>CORTES</h2>
+                <h4>{{sellpoint.name}}</h4>
+                {%if cuts%}
+                    <div class="action-header clearfix">
+                        <div class="ah-search" style="display: none;">
+                            <input type="text" placeholder="Buscar corte..." class="ahs-input">
+                            <i class="ahs-close" data-ma-action="action-header-close">×</i>
+                        </div>
+                        <ul class="actions">
+                            <li>
+                                <a href="" data-ma-action="action-header-open">
+                                    <i class="zmdi zmdi-search"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>IDPV</th>
+                                    <th>FECHA</th>
+                                    <th>TOTAL</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for object in cuts%}
+                                    <tr>
+                                        <td>{{object.code_company}}</td>
+                                        <td>{{object.code_sellpoint}}</td>
+                                        <td>{{object.date|date:"d M Y"}} <br />{{object.date|date:"H:i"}}</td>
+                                        <td># {{object.len_tickets}} clientes<br /> $ {{object.total|intcomma}}</td>
+                                        <td>    
+                                            <a href="{%url 'cut_details'%}?id={{object.id}}" class="btn btn-xs btn bgm-black waves-effect">
+                                                <i class="fa fa-eye"></i> detalles
+                                            </a>
+                                            {%if not object.terminate%}
+                                                <br />
+                                                <a href="" class="btn btn-xs btn bgm-teal waves-effect make_cut" style="margin-top:5px;" cutid="{{object.id}}">
+                                                    <i class="fa fa-cut"></i> cortar
+                                                </a>
+                                            {%endif%}
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                        <ul class="pagination pull-right">
+                        {% if cuts.has_previous %}
+                            <li>
+                                <a href="?page={{ cuts.previous_page_number }}&id={{sellpoint.id}}" aria-label="Previous" class="btn btn-white">
+                                    <i class="zmdi zmdi-chevron-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {%for num in cuts.paginator.page_range%}
+                            {%if num >= pagemin and num <= pagemax%}
+                                <li class="{%if num == cuts.number%}active{%endif%}">
+                                    <a class="btn btn-white {%if num == cuts.number%}active{%endif%}" href="?page={{num}}&id={{sellpoint.id}}"> {{num}} </a>
+                                </li>
+                            {%endif%}
+                        {%endfor%}
+                        {% if cuts.has_next %}
+                            <li>
+                                <a  href="?page={{ cuts.next_page_number }}&id={{sellpoint.id}}" class="btn btn-white" aria-label="Next">
+                                    <i class="zmdi zmdi-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                {%else%}
+                    <br />
+                        <strong>No hay cortes en este punto de venta</strong> 
+                    <br /> 
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $( ".make_cut" ).click(function(event) {
+            event.preventDefault();
+            cutid = $(this).attr('cutid')
+            button = $(this)
+            var data = {
+                'make_cut': true,
+            };
+            $.ajax({
+                url : "{%url 'cut_details'%}?id="+cutid, 
+                type : "POST", 
+                dataType: "json",
+                data : data,
+                success : function(json) {
+                    button.hide(300)
+                    swal("Cortado con exito!", "", "success")
+                },
+                error : function(xhr,errmsg,err) {
+                    alert('Ocurrio un error')
+                    console.log(xhr.status + ": " + xhr.responseText); 
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

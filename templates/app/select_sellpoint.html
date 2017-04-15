@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load mptt_tags %}
+
+{% block title %}Seleccionar Punto de Venta | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+{% endblock %}
+
+{%block menu%}
+{%endblock%}
+
+{% block style %}  
+    .color-menu{
+        margin-right:5px;
+    }
+    li{
+        list-style-type: none;
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content"> 
+                <h2>SELECCIONA EL PUNTO DE VENTA</h2>
+                <p>
+                    <strong>Estas asignad@ a mas de un punto de venta, elige uno para marcar productos.</strong>
+                </p>
+                {%for sellpoint in request.user.sell_point.all%}
+                    {%if request.user.profile == 'Vendedor' or request.user.profile == 'Cajero y Vendedor' or request.user.profile == 'Vendedor autorizado para cobrar' or request.user.is_superuser%}
+                        <div class="col-sm-4">
+                            <div class="card profile-view">
+                                <div class="pv-header" style="background-image: url(/static/img/headers/sm/{% cycle '4' '5' '6' '7' '8' '9' '10' '11'%}.png);">
+                                    <img src="{%static 'img/logo-egg.png'%}" class="pv-main" alt="">
+                                </div>
+
+                                <div class="pv-body">
+                                    <h2>{{sellpoint.name}}</h2>
+                                    <h4>VENDEDOR</h4>
+                                    <a href="{%url 'vendor' sellpoint.slug%}?id={{sellpoint.id}}" class="btn bgm-black btn-sm waves-effect " style="margin-top:10px;">ENTRAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    {%endif%}
+                    {%if request.user.profile == 'Cajero' or request.user.profile == 'Cajero y Vendedor' or request.user.is_superuser%}
+                        <div class="col-sm-4">
+                            <div class="card profile-view">
+                                <div class="pv-header" style="background-image: url(/static/img/headers/sm/{% cycle '4' '5' '6' '7' '8' '9' '10' '11'%}.png);">
+                                    <img src="{%static 'img/logo-egg.png'%}" class="pv-main" alt="">
+                                </div>
+
+                                <div class="pv-body">
+                                    <h2>{{sellpoint.name}}</h2>
+                                    <h4>CAJA</h4>
+                                    <a href="" class="btn bgm-black btn-sm waves-effect " style="margin-top:10px;">ENTRAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        
+
+    });
+    </script>
+{% endblock %}

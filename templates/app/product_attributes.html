@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Atributos del Producto | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <a href="{%url 'products'%}" class="btn bgm-black btn-sm waves-effect pull-right">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> REGRESAR
+                </a>
+                <h2>{{product.name}}</h2>
+                <p>
+                    <small>Listado de productos en cada sucursal.</small>
+                </p>
+                {%if object.image%}
+                    <img alt="image" class="img-circle" src="{{MEDIA_URL}}{{object.logo}}" style="width:50px;margin-right: 50px;">
+                {%else%}
+                    <img alt="image" class="img-circle" src="{%static 'img/default-profile.jpg'%}" style="width:50px;margin-right: 50px;">
+                {%endif%}
+                
+                {%if product_attrs%}
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped">
+                           <thead>
+                                <tr>
+                                    <th>Alias</th>
+                                    <th><i class="fa fa-bullseye"></i></th>
+                                    <th>Atributos</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Alias</th>
+                                    <th><i class="fa fa-bullseye"></i></th>
+                                    <th>Atributos</th>
+                                    <th>-</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for object in product_attrs%}
+                                    <tr>
+                                        <td>
+                                            <a href="{%url 'product_form' 'edit'%}?id={{object.product.id}}" style="color: inherit;">
+                                                {{object.alias}} 
+                                                <br />
+                                                <span style="font-size:10px;"><i class="fa fa-barcode"></i> {%if object.bar_code%}{{object.bar_code}}{%else%}-{%endif%}</span>
+                                                <br />
+                                                <span style="font-size:10px;">ACTIVO: {%if object.active%} <i class="fa fa-check" style="color:#8BC34A"></i> {%else%} <i class="fa fa-times" style="color:#f44336"></i> </span>{%endif%}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'product_form' 'edit'%}?id={{object.product.id}}" style="color: inherit;">
+                                                <strong>{{object.sell_point.name}}</strong><br />
+                                                <small> <i class="fa fa-usd"></i> {{object.price|floatformat:2|intcomma}} </small> <br />
+                                                <small><span style="font-size:11px;">{{object.inventory}} {{object.product.units}}</span></small>
+
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'product_form' 'edit'%}?id={{object.product.id}}" style="color: inherit;">
+                                            <span style="font-size:10px;">IVA: {%if object.taxes%} <i class="fa fa-check" style="color:#8BC34A"></i> {%else%} <i class="fa fa-times" style="color:#f44336"></i> {%endif%} </span><br />
+                                                <span style="font-size:10px;">DINAMICO: {%if object.dynamic_price%} <i class="fa fa-check" style="color:#8BC34A"></i> {%else%} <i class="fa fa-times" style="color:#f44336"></i> {%endif%}</span> <br />
+                                                <span style="font-size:10px;">PRIMARIO: {%if object.primary%} <i class="fa fa-check" style="color:#8BC34A"></i> {%else%} <i class="fa fa-times" style="color:#f44336"></i> </span>{%endif%}                                                
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'product_attribute_form'%}?id={{object.id}}" class="btn btn-xs btn bgm-black waves-effect">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
+{% endblock %}

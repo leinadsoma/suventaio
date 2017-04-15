@@ -1,0 +1,27 @@
+#Archivos de la maquina virtual
+
+media/
+lib/
+include/
+share/
+local/
+djcelery/
+bin/
+logs/
+
+var_production.py
+Icon
+pip-selfcheck.json
+LICENSE
+ChangeLog
+
+#Basura
+*.pyc
+*.DS_Store
+*.Python
+*.dropbox
+__pycache__
+.Python
+.bash_history
+
+*.sqlite3

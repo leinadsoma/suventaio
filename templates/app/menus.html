@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load mptt_tags %}
+
+{% block title %}Menus | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.3/themes/default/style.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block style %}  
+    .color-menu{
+        margin-right:5px;
+    }
+    li{
+        list-style-type: none;
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content"> 
+                <a href="{%url 'menu_form' 'add'%}" class="btn bgm-black btn-sm waves-effect pull-right">
+                    <i class="fa fa-plus"></i> AGREGAR MENÚ
+                </a>
+                <h2>MIS MENÚS</h2>
+                <p>
+                    <small>Todos las categorias para tus productos se comparten para todos tus puntos de venta</small>
+                </p>
+                {%if menus%}
+                    <div class="col-sm-5" style="margin-bottom:30px;">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="zmdi zmdi-search"></i></span>
+                            <div class="fg-line">
+                                <input type="text" class="form-control" placeholder="Buscar un menú" id="tree_q">
+                            </div>
+                        </div>
+                    </div>
+                {%endif%}
+                <div class="col-sm-12">
+                    {%if menus%}
+                        <div id="tree">
+                            <ul>
+                                {% recursetree menus %}
+                                    <li id="{{ node.id }}" data-jstree='{"opened":true,"icon":"glyphicon glyphicon-chevron-right"}'>
+                                        <span class="menu-element" ide="{{ node.ide }}" slug="{{ node.slug }}"> 
+                                            <i class="fa fa-circle" style="color:{{ node.color }}"></i> 
+                                            <span style="margin-left:5px;">{{ node.name }}</span>
+                                        </span>
+                                        {% if not node.is_leaf_node %}
+                                            <ul>
+                                            {{ children }} 
+                                            </ul>
+                                        {% endif %}
+                                    </li>
+                                {% endrecursetree %}
+                            </ul>
+                        </div>
+                        <hr />
+                        <h5> Instrucciones:</h5>
+                        <small>
+                            <p> Da click en el nombre para editar un menu 
+                        </small>
+                    {%else%}
+                    <br/>
+                    <strong>Aun no tienes menus dados de alta</strong>
+                    <br/>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <!-- Tree -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.3/jstree.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+
+        $('#div_id_color').hide()
+        
+        $("#form").validate({
+            errorClass: 'has-error',
+            validClass: 'success',
+            submitHandler: function(form) {
+                $("#id_color").val( $("#colorpicker").val() )
+                update = $('#id_add_menu').attr('edit')
+                if (update=='edit'){
+                    var data = {
+                        'edit': true,
+                        'id': $('#id_add_menu').val(),
+                        'name': $('#id_name').val(),
+                        'color': $('#id_color').val(),
+                        'parent': $('#id_parent').val(),
+                    };
+                    $.ajax({
+                        url : "{%url 'menus_ajax'%}", 
+                        type : "POST", 
+                        dataType: "json",
+                        data : data,
+                        success : function(json) {
+                            location.reload();
+                        },
+                        error : function(xhr,errmsg,err) {
+                            alert('Ocurrio un error')
+                            console.log(xhr.status + ": " + xhr.responseText); 
+                        }
+                    });
+                }
+                else{
+                    form.submit();
+                }
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).parents("div.form-group").addClass(errorClass).removeClass(validClass);
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).parents("div.form-group").removeClass(errorClass).addClass(validClass);
+            }
+        });
+
+        $('#tree').jstree({
+            "core" : {
+              "check_callback" : true
+            },
+            "plugins" : [ "dnd","search" ]
+        });
+
+        $('#tree').on('select_node.jstree', function (e, data) {
+            $(location).attr('href', '{%url "menu_form" "edit"%}?id='+data.node.id)
+        });
+
+        $('#tree').on('move_node.jstree', function (e, data) {
+            treeData = $('#tree').jstree(true).get_json('#', {flat:false})
+            var data = {
+                'treeData': JSON.stringify(treeData),
+            };
+            $.ajax({
+                url : "{%url 'menus_ajax'%}", 
+                type : "POST", 
+                dataType: "json",
+                data : data,
+                success : function(json) {
+                },
+                error : function(xhr,errmsg,err) {
+                    alert('Ocurrio un error')
+                    console.log(xhr.status + ": " + xhr.responseText); 
+                }
+            });
+        });
+        
+        var to = false;
+        $('#tree_q').keyup(function () {
+            if(to) { clearTimeout(to); }
+            to = setTimeout(function () {
+                var v = $('#tree_q').val();
+                $('#tree').jstree(true).search(v);
+            }, 250);
+        });
+
+    });
+    </script>
+{% endblock %}

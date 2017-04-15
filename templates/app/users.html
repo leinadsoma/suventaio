@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% load staticfiles i18n %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Usuarios | {{apptitle}}{% endblock title %}
+
+{% block css %}  
+    <link href="{%static 'vendors/bower_components/chosen/chosen.css'%}" rel="stylesheet">
+    <link href="{%static 'vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <a href="{%url 'user_form' 'add'%}" class="btn btn-sm bgm-black waves-effect pull-right">
+                    <i class="fa fa-plus"></i> AGREGAR USUARIO
+                </a>
+                <h2> 
+                    USUARIOS DEL SISTEMA
+                </h2>
+                <p>
+                    <small>
+                    Listado de los usuarios del sistema <strong>(Solo un administrador puede verlos)</strong>
+                    </small>
+                </p>
+                {%if users%}
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Avatar</th>
+                                    <th>Usuario</th>
+                                    <th>Perfil</th>
+                                    <th><i class="fa fa-bullseye"></i></th>
+                                    <th>Activo?</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Avatar</th>
+                                    <th>Usuario</th>
+                                    <th>Perfil</th>
+                                    <th><i class="fa fa-bullseye"></i></th>
+                                    <th>-</th>
+                                    <th>-</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for obj in users%}
+                                     <tr>
+                                        <td>
+                                            {%if obj.avatar%}
+                                                <a href="{%url 'user_form' 'edit'%}?id={{obj.id}}" style="color: inherit;">
+                                                    <img alt="image" src="{{MEDIA_URL}}{{obj.logo}}" style="width:30px;">
+                                                </a>
+                                            {%else%}
+                                                <a href="{%url 'user_form' 'edit'%}?id={{obj.id}}" style="color: inherit;">
+                                                    <img alt="image" src="{%static 'img/default-profile.jpg'%}" style="width:30px;">
+                                                </a>
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'user_form' 'edit'%}?id={{obj.id}}" style="color: inherit;">
+                                                {{obj.visible_username}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {%if obj.profile%}
+                                                {{obj.profile}}
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            {%if obj.sell_point.all%}
+                                                {%for pv in obj.sell_point.all%}
+                                                    <small>{{pv.name}}</small><br />
+                                                {%endfor%}
+                                            {%else%}
+                                                -
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            {%if obj.is_active%}
+                                                <i class="fa fa-check" style="color:#8BC34A"></i>
+                                            {%else%}
+                                                <i class="fa fa-times" style="color:#f44336"></i>
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            <a href="{%url 'user_form' 'edit'%}?id={{obj.id}}" class="btn btn-xs btn bgm-black waves-effect">
+                                                <i class="fa fa-eye"></i> Ver
+                                            </a>
+                                            <a href="{%url 'change_password' obj.id%}" class="btn btn-xs btn bgm-black waves-effect" style="margin-left:5px;">
+                                                <i class="fa fa-key"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                {%else%}
+                    <hr />
+                    <h4>No hay usuarios en el sistema.</h4>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{%static 'vendors/bower_components/chosen/chosen.jquery.js'%}"></script>
+    <script src="{%static 'vendors/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8" async defer>
+    $( document ).ready(function() {
+        $('#data-table').DataTable();
+    });
+    </script>
+{% endblock %}

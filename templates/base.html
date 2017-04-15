@@ -1,0 +1,221 @@
+{% load staticfiles i18n %}
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Inicio | {{apptitle}}{% endblock title %}</title>
+
+        <!-- Vendor CSS -->
+        <link href="{%static 'vendors/bower_components/fullcalendar/dist/fullcalendar.min.css'%}" rel="stylesheet">
+        <link href="{%static 'vendors/bower_components/animate.css/animate.min.css'%}" rel="stylesheet">
+        <link href="{%static 'vendors/bower_components/sweetalert2/dist/sweetalert2.min.css'%}" rel="stylesheet">
+        <link href="{%static 'vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css'%}" rel="stylesheet">
+        <link href="{%static 'vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css'%}" rel="stylesheet">
+
+        <!-- CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+
+        {% block css %}  
+        {% endblock %}
+
+        <link href="{%static 'css/app_1.min.css'%}" rel="stylesheet">
+        <link href="{%static 'css/app_2.min.css'%}" rel="stylesheet">
+        <link href="{%static 'css/demo.css'%}" rel="stylesheet">
+
+        <style>
+            .hi-menu>li>a>.fa {
+                font-size: 24px;
+                line-height: 36px;
+            }
+            label.has-error{
+                color: #f6675d;
+                font-size: 10px;
+            }
+            span.input-group-addon{
+                background-color: transparent!important;
+                border-color: transparent!important;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:focus, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                background: rgb(201, 89, 73);
+                color: #fff!important;
+            }
+            .s-profile .main-menu {
+                background-color: #ececec;
+            }
+            [data-ma-theme=gray] {
+                background-color: #042331;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:focus, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                background: rgb(12, 129, 193);
+                color: #fff!important;
+            }
+            .sub-menu ul>li ul {
+                font-size: 12px;
+                margin: 0px 0;
+                background-color: white;
+            }
+            .main-menu {
+                list-style: none;
+                padding-left: 0;
+                margin: 5px 0 0;
+            }
+            .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+                z-index: 3;
+                color: #fff;
+                background-color: #009688;
+                border-color: #fff;
+                cursor: default;
+            }
+            {% block style %}  
+            {% endblock %}
+        </style>
+    </head>
+    <body>
+        <header id="header" class="clearfix" data-ma-theme="teal">
+            <ul class="h-inner">
+                <li class="hi-trigger ma-trigger" data-ma-action="sidebar-open" data-ma-target="#sidebar">
+                    <div class="line-wrap">
+                        <div class="line top"></div>
+                        <div class="line center"></div>
+                        <div class="line bottom"></div>
+                    </div>
+                </li>
+                <li class="hi-logo hidden-xs">
+                    <a href="/">
+                        <strong class="hi-slogo"> {{apptitle}} <small style="font-size:11px;text-transform: lowercase;" >io</small> | 
+                        </strong>  <small style="font-size:11px;">  {{request.user.company.name}}</small>  
+                    </a>
+                </li>
+                <li class="pull-right">
+                    <ul class="hi-menu">
+                        {%block header_menu%}
+                            <li>
+                                <a href="{%url 'change_password' request.user.id%}"><strong style="margin-right: 10px;"></strong> 
+                                <i class="fa fa-key" style="font-size:20px"></i></a>
+                            </li>
+                        {%endblock%}
+                        <li>
+                            <a href="{%url 'user_logout'%}"><strong style="margin-right: 10px;">Salir </strong> 
+                            <i class="fa fa-sign-out" style="font-size:20px"></i></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+        <section id="main">
+            <aside id="sidebar" class="sidebar c-overflow">
+                <div class="s-profile">
+                    <a href="" data-ma-action="profile-menu-toggle">
+                        <div class="sp-pic">
+                            <img src="{%static 'img/default-profile.jpg'%}" alt="">
+                            <span class="pull-right" style="color:#fff">{{now.date}}</span><br />
+                            {%if show_sellpoint_name%}
+                                <span class="pull-right" style="color:#fff"> 
+                                    {{sell_point.name}}
+                                </span>
+                            {%endif%}
+                        </div>
+                        <div class="sp-info">
+                            {{request.user.profile}} | <strong>{{request.user.visible_username}}</strong>
+                            <i class="zmdi zmdi-caret-down"></i>
+                        </div>
+                    </a>
+
+                    <ul class="main-menu">
+                        <li>
+                            <a href="{%url 'change_password' request.user.id%}"><i class="fa fa-key"></i> Cabiar Contraseña</a>
+                        </li>
+                        <li>
+                            <a href="{%url 'user_logout'%}"><i class="fa fa-sign-out"></i> Salir</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="main-menu">
+                    {%block menu%}
+                        <li class="">
+                            <a href="/"><i class="zmdi zmdi-home"></i> Inicio </a>
+                        </li>
+                        <li class="">
+                            <a href="{%url 'sellpoints'%}"><i class="fa fa-bullseye"></i> Puntos de venta </a>
+                        </li>
+                        <li class="">
+                            <a href="{%url 'users'%}"><i class="fa fa-user"></i> Usuarios </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'menus'%}"><i class="fa fa-bars"></i> <span class="nav-label"> Menus </span> </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'products'%}"><i class="fa fa-shopping-cart"></i> <span class="nav-label"> Productos </span> </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'sellpoints_cut'%}"><i class="fa fa-scissors"></i> <span class="nav-label"> Cortes </span> </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'invoice_sellpoint'%}"><i class="fa fa-file-pdf-o"></i> <span class="nav-label"> Facturación </span> </a>
+                        </li>
+                    {%endblock%}
+                </ul>
+            </aside>
+
+            <section id="content">
+                <div class="container">
+                    {% for message in messages %}
+                        <div class="alert  alert-{%if message.tags == 'error'%}danger{%else%}{{ message.tags }}{%endif%} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </section>
+
+        </section>
+        
+        {%block footer%}
+        <footer id="footer">
+            <img src="{%static 'img/logo_bg.png'%}" style="width: 150px;">
+            <p>Powered by ZaresDelWeb &copy; {{now.date.year}}</p>
+            <ul class="f-menu">
+                <li><a href="">Home</a></li>
+                <li><a href="">Dashboard</a></li>
+                <li><a href="">Reports</a></li>
+                <li><a href="">Support</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </footer>
+        {%endblock footer%}
+        
+        <!-- Javascript Libraries -->
+        <script src="{%static 'vendors/bower_components/jquery/dist/jquery.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/flot/jquery.flot.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/flot/jquery.flot.resize.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/flot.curvedlines/curvedLines.js'%}"></script>
+        <script src="{%static 'vendors/sparklines/jquery.sparkline.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/moment/min/moment.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/fullcalendar/dist/fullcalendar.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/Waves/dist/waves.min.js'%}"></script>
+        <script src="{%static 'vendors/bootstrap-growl/bootstrap-growl.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/sweetalert2/dist/sweetalert2.min.js'%}"></script>
+        <script src="{%static 'vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+        <script src="{%static 'js/app.js'%}"></script>
+        <script>
+            $( document ).ready(function() {
+            });
+        </script>
+        {% block js %}
+        {% endblock %}
+        <!-- Placeholder for IE9 -->
+        <!--[if IE 9 ]>
+            <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+        <![endif]-->
+        {% block scripts %}
+        {% endblock %}
+    </body>
+  </html>

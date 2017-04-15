@@ -1,0 +1,53 @@
+{% extends "app/base_login.html" %}
+
+{% load i18n %} 
+{% load account %}
+{% load staticfiles i18n %}
+{% load socialaccount %}
+
+{% block title %} Recuperar | {{apptitle}} {% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="ibox" style="margin-bottom:50px">
+                <div class="ibox-content">
+                    {%if not message%}
+                        {%for user in users%}
+                            <form method="post" enctype="multipart/form-data" class="m-t">{% csrf_token %}
+                                <p><strong>{{message_error}}</strong></p>
+                                <p>Contraseña</p>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" placeholder="Nueva contraseña" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="re_password" class="form-control" placeholder="Nueva contraseña" value="">
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="btn-group">
+                                            <div style="margin-bottom: 0px">
+                                                <button type="submit" name="account" value="{{user.account}}" class="btn btn-login btn-block">
+                                                    <strong>Guardar</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                    </div>
+                                </div>
+                            </form>
+                        {%endfor%}
+                    {%else%}
+                        <p style="font-size:14px;margin-top:10px" class="text-center"> {{message|safe}} </p>
+                            <a href="{%url 'user_login'%}" class="btn btn-login btn-block">
+                                <strong>Entrar a {{apptitle}}</strong>
+                            </a>
+                        </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+                        
