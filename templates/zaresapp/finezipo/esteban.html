@@ -1,0 +1,138 @@
+{% extends "zaresapp/finezipo/base.html" %}
+
+{% load i18n %} 
+{% load staticfiles i18n %}
+
+{%block title%}FZ | {{artista|upper}}{%endblock%}
+
+{%block styles%}
+{%endblock%}
+
+{%block css%}
+.navbar .navbar-nav > li > a {
+    color: #000;
+}
+@media (max-width: 768px){
+  .cbp-af-header {
+    background: #000;
+    background-color: rgba(0, 0, 0, 0.23);
+  }
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #000;
+}
+.cbp-af-header.cbp-af-header-shrink {
+    background: rgba(255, 255, 255, .6);
+}
+navbar h1 a{
+    color: #000!important;
+}
+.navbar h1 small{
+    color: #000;
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #000;
+}
+.navbar h1 a {
+    color: #000;
+}
+{%endblock%}
+
+{%block content%}
+  <section id="port-item-details">
+    <div class="container-fluid padding-side-60">
+
+       <div class="e-divider-8"></div>
+       <div class="post-header">
+          <h2 class="e-uppercase" style="margin-top: 35px;">ESTEBAN MARTINEZ</h2>
+          <div class="e-divider-2"></div>
+       </div>
+       <div class="e-divider-4"></div>
+       <div class="row">
+          <div class="col-md-4">
+             <img src="{%static 'zaresapp/finezipo/assets/custom/images/esteban/1.jpg'%}" class="img-responsive">
+             <div class="e-divider-2"></div>
+             <ul class="jobinfo">
+                <p><strong>PROXIMAS FECHAS</strong></p>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+             </ul>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-7">
+             <h3 class="font-accident-two-normal e-uppercase">BIO</h3>
+             <div class="e-divider-2"></div>
+             <p>
+                Semifinalista con 20 años para la revista Men`s Health en España (2008). Comenzó en la televisión de la mano de MTV  Gandia Shore (2012). Estuvo en el programa de radio llamado happy fm asesorando a los chicos a cómo ligar y con cosas referentes del amor (2012). Imagen del Pride festival de Los Ángeles (2013). Programa de boy scouts para la cadena española tele 5 , en el cual quede finalista (2013). Imagen de la marca española de nutrición deportiva Nutrytec (2014). Programa Super Shore 1 y 2 de la cadena MTV (2015 - 2016). Desfile para el diseñador español Francis Montesinos en la Mercedes Benz Fashion Week Madrid (2016). Dos publicaciones en la revista de New York,  2bexposed Magazine (2016). Revista Harper's bazar (2016). Imagen del festival gay Arena en Playa del Carmen (2017)
+             </p>
+
+             <div class="e-divider-6"></div>
+
+             <div class="row">
+                <div class="col-md-12 padding-side-50 bg-color01">
+
+                   <div class="e-divider-4"></div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">SHOW CASE</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">PRESENCIA</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">CARNAVALES</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-6">
+                      <h4 class="font-accident-two-normal e-uppercase">INAUGURACIONES</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-6">
+                      <h4 class="font-accident-two-normal e-uppercase">FIESTAS PRIVADAS</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <section id="portfolio" class="e-block e-block-skin pt-section">
+    <div class="light">
+       <div class="container-fluid text-center padding-side-60">
+          <h3 class="font-accident-two-normal e-uppercase">GALERIA</h3>
+          <div class="e-divider-8"></div>
+       </div>
+       <div class="grid container-fluid ">
+          <div id="posts" class="row popup-container">
+             <div class="grid-item grid-sizer posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/esteban/1.jpg'%}" class="img-responsive" alt="esteban"/>
+                   </figure>
+                </div>
+             </div>
+             <div class="grid-item media-objects misc col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/esteban/2.jpg'%}" class="img-responsive" alt="esteban"/>
+                   </figure>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="e-divider-6"></div>
+    </div>
+ </section>
+ <!-- /Portfolio Block  -->
+{%endblock%}
+
+{%block js%}
+{%endblock%}
+
+{%block script%}
+{%endblock%}
+

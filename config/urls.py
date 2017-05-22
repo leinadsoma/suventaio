@@ -51,6 +51,12 @@ urlpatterns = [
     url(r'^invoice-sellpoint/$', invoice_sellpoint, name='invoice_sellpoint'),
     url(r'^invoice-sellpoint/(.+)/$', invoice_sellpoint_form, name='invoice_sellpoint_form'),
 
+    ###FINEZIPO
+    url(r'^finezipo/nosotros/$', finezipo_nosotros, name='finezipo_nosotros'),
+    url(r'^finezipo/artistas/(.+)/$', finezipo_artistas, name='finezipo_artistas'),
+    url(r'^finezipo/contacto/$', finezipo_contacto, name='finezipo_contacto'),
+
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

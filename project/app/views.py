@@ -81,7 +81,10 @@ def landing(request):
 def index(request):
 	if request.user.is_anonymous():
 		domain = get_domain(request)
-		return render(request, 'app/landing.html',locals())
+		if domain == 'finezipo.com' or 'www.finezipo.com' or 'localhost:8000':
+			return render(request, 'zaresapp/finezipo/index.html',locals())
+		else:
+			return render(request, 'app/landing.html',locals())
 	else:
 		if request.user.profile == 'Administrador' or request.user.is_superuser:
 			return render(request, 'app/index.html',locals())
@@ -641,5 +644,39 @@ def invoice_sellpoint_form(request, acction):
 	else:
 		raise Http404
 
+def finezipo_nosotros(request):
+	return render(request, 'zaresapp/finezipo/nosotros.html',locals())
+
+def finezipo_artistas(request, artista):
+	if artista == 'manelyk':
+		artista = 'Manelyk'
+		return render(request, 'zaresapp/finezipo/manelik.html',locals())
+	if artista == 'sabrina':
+		artista = 'Sabrina'
+		return render(request,'zaresapp/finezipo/sabrina.html',locals())
+	if artista == 'lorena':
+		artista = 'Lorena Herrera'
+		return render(request,'zaresapp/finezipo/lorena.html',locals())
+	if artista == 'esteban':
+		artista = 'Esteban Martinez'
+		return render(request,'zaresapp/finezipo/esteban.html',locals())
+	if artista == 'elettra':
+		artista = 'Elettra Lamborghini'
+		return render(request,'zaresapp/finezipo/elettra.html',locals())
+	if artista == 'igor':
+		artista = 'Igor'
+		return render(request,'zaresapp/finezipo/igor.html',locals())
+	if artista == 'fernando':
+		artista = 'Fernando'
+		return render(request,'zaresapp/finezipo/fernando.html',locals())
+	if artista == 'jawi':
+		artista = 'Jawi'
+		return render(request,'zaresapp/finezipo/jawi.html',locals())
+	if artista == 'vanessa':
+		artista = 'Vanessa Claudio'
+		return render(request,'zaresapp/finezipo/vanessa.html',locals())
+
+def finezipo_contacto(request):
+	return render(request, 'zaresapp/finezipo/contacto.html',locals())
 
 

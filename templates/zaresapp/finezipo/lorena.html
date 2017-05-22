@@ -1,0 +1,145 @@
+{% extends "zaresapp/finezipo/base.html" %}
+
+{% load i18n %} 
+{% load staticfiles i18n %}
+
+{%block title%}FZ | {{artista|upper}}{%endblock%}
+
+{%block styles%}
+{%endblock%}
+
+{%block css%}
+.navbar .navbar-nav > li > a {
+    color: #000;
+}
+@media (max-width: 768px){
+  .cbp-af-header {
+    background: #000;
+    background-color: rgba(0, 0, 0, 0.23);
+  }
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #000;
+}
+.cbp-af-header.cbp-af-header-shrink {
+    background: rgba(255, 255, 255, .6);
+}
+navbar h1 a{
+    color: #000!important;
+}
+.navbar h1 small{
+    color: #000;
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #000;
+}
+.navbar h1 a {
+    color: #000;
+}
+{%endblock%}
+
+{%block content%}
+  <section id="port-item-details">
+    <div class="container-fluid padding-side-60">
+
+       <div class="e-divider-8"></div>
+       <div class="post-header">
+          <h2 class="e-uppercase" style="margin-top: 35px;">LORENA HERRERA</h2>
+          <div class="e-divider-2"></div>
+       </div>
+       <div class="e-divider-4"></div>
+       <div class="row">
+          <div class="col-md-4">
+             <img src="{%static 'zaresapp/finezipo/assets/custom/images/lorena/1.jpg'%}" class="img-responsive">
+             <div class="e-divider-2"></div>
+             <ul class="jobinfo">
+                <p><strong>PROXIMAS FECHAS</strong></p>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+             </ul>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-7">
+             <h3 class="font-accident-two-normal e-uppercase">BIO</h3>
+             <div class="e-divider-2"></div>
+              <p>
+                Inició su carrera como modelo participando en los certámenes de belleza junto a Cristina Villaseñor. Los certámenes en los que ha participado son "The Look Of The Year", "Miss Bikini International" y "Señorita Univision".
+              </p>
+
+              <p>Ha participado en un total de 56 películas, entre las que figuran Cocaína, El arrecife de los alacranes, El abrigo de mink, Muerte ciega, La fichera más rápida del oeste, Traición, Perseguida, Burbujas de amor, Mafia con cara de mujer, Table Dance, Mi última bala; y telenovelas como Muchachitas, Entre la vida y la muerte, Dos mujeres, un camino, El premio mayor, María Isabel, Mi destino eres tú, Amy, la niña de la mochila azul y Lola, érase una vez.
+              </p>
+
+              <p>Durante su carrera ha posado desnuda para la revista para caballeros en el año de 1987 Signore bajo el pseudónimo de "Bárbara Ferrat", cosa que ella desmiente porque asegura se trató de una supuesta hermana gemela. En marzo del 2011 posa desnuda para la edición mexicana de Playboy.</p>
+
+              <p>En el año 1996 Lorena debutó como cantante con su álbum homónimo del que se destacó el sencillo "Soy". Dos años después publicó el álbum "Dame amor". En 2009 regresó a la música con "Desnúdame el alma", del cual se extrajo el sencillo "Ya".</p>
+
+              <p>En 2015, de manera independiente publicó el sencillo "Masoquista", en el que incursionó en la música dance-electrónica. Ese mismo año con Flash, Lorena se consagró como una de las artistas mexicanas con mejores producciones visuales,1 el vídeo siguió los pasos de su anterior sencillo y se convirtió en tendencia a pocos días de su estreno. Con está canción Herrera se estableció como un icono para la comunidad LGBT e inició una series de presentaciones en los clubes gay más importantes de México.</p>
+
+              <p>En 2016 publicó el vídeo para "Plastik", el tercer sencillo lanzado de su nueva etapa musical. El estreno del vídeo se realizó a través del canal de vídeos LorenaHerreraVevo, donde también se colgaron sus anteriores clips Masoquista y Flash.</p>
+
+              <p>En septiembre del 2016 el vídeo "Karma" hizo su debut en el canal de Vevo de la cantante, en este dejó a un lado el estilo erótico de sus anteriores clips para concentrarse en otros elementos audiovisuales como el vestuario, escenarios y movimientos de cámara.2 Todo el dinero recaudado a través de las plataformas digitales con esta canción será donado a los niños que viven en situación de extrema pobreza en México.</p>
+
+             <h3 class="font-accident-two-normal e-uppercase">SERVICIOS</h3>
+             <div class="row">
+                <div class="col-md-12 padding-side-50 bg-color01">
+
+                   <div class="e-divider-4"></div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">SHOW CASE</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">PRESENCIA</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">CARNAVALES</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+
+                </div>
+             </div>
+             <div class="e-divider-6"></div>
+             
+          </div>
+       </div>
+    </div>
+ </section>
+ <section id="portfolio" class="e-block e-block-skin pt-section">
+    <div class="light">
+       <div class="container-fluid text-center padding-side-60">
+          <h3 class="font-accident-two-normal e-uppercase">GALERIA</h3>
+          <div class="e-divider-8"></div>
+       </div>
+       <div class="grid container-fluid ">
+          <div id="posts" class="row popup-container">
+             <div class="grid-item grid-sizer posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/lorena/1.jpg'%}" class="img-responsive" alt="lorena"/>
+                   </figure>
+                </div>
+             </div>
+             <div class="grid-item media-objects misc col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/lorena/2.jpg'%}" class="img-responsive" alt="lorena"/>
+                   </figure>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="e-divider-6"></div>
+    </div>
+ </section>
+ <!-- /Portfolio Block  -->
+{%endblock%}
+
+{%block js%}
+{%endblock%}
+
+{%block script%}
+{%endblock%}
+

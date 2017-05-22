@@ -1,0 +1,159 @@
+{% extends "zaresapp/finezipo/base.html" %}
+
+{% load i18n %} 
+{% load staticfiles i18n %}
+
+{%block title%}FZ | {{artista|upper}}{%endblock%}
+
+{%block styles%}
+{%endblock%}
+
+{%block css%}
+.navbar .navbar-nav > li > a {
+    color: #000;
+}
+@media (max-width: 768px){
+  .cbp-af-header {
+    background: #000;
+    background-color: rgba(0, 0, 0, 0.23);
+  }
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #000;
+}
+.cbp-af-header.cbp-af-header-shrink {
+    background: rgba(255, 255, 255, .6);
+}
+navbar h1 a{
+    color: #000!important;
+}
+.navbar h1 small{
+    color: #000;
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #000;
+}
+.navbar h1 a {
+    color: #000;
+}
+{%endblock%}
+
+{%block content%}
+  <section id="port-item-details">
+    <div class="container-fluid padding-side-60">
+
+       <div class="e-divider-8"></div>
+       <div class="post-header">
+          <h2 class="e-uppercase" style="margin-top: 35px;">ELETTRA LAMBORGHINI</h2>
+          <div class="e-divider-2"></div>
+       </div>
+       <div class="e-divider-4"></div>
+       <div class="row">
+          <div class="col-md-4">
+             <img src="{%static 'zaresapp/finezipo/assets/custom/images/elettra/elettra.jpg'%}" class="img-responsive">
+             <div class="e-divider-2"></div>
+             <ul class="jobinfo">
+                <p><strong>PROXIMAS FECHAS</strong></p>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+                <li>LUGAR @ <span>02.03.2016</span></li>
+             </ul>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-7">
+             <h3 class="font-accident-two-normal e-uppercase">BIO</h3>
+             <div class="e-divider-2"></div>
+             <p>
+                En agosto 2015, tuvo la oportunidad de aventurarse en la televisión, con el inicio de las grabaciones del reality show Super Shore, que tuvo suya estrena en 2 de febrero de 2016 simultáneamente en la MTV Latinoamerica, MTV España y MTV Francia. En junio de 2016, Lamborghini fue confirmada para la segunda temporada del programa. De noviembre de 2016 a la enero de 2017, integró la primera temporada del programa italiano #Riccanza.
+                En diciembre de 2016, Elettra fue confirmada como una concurrente en el popular reality Gran Hermano VIP 5. En 28 de febrero de 2017, fue confirmada como integrante del elenco principal de la décima cuarta temporada del programa británico Geordie Shore. En marzo del mismo año, fue escogida para hacer un intercambio del Gran Hermano para el Big Brother Brasil 17. En marzo de 2017, fue confirmada en el elenco de la tercera temporada del reality Super Shore.
+             </p>
+
+             <div class="e-divider-6"></div>
+
+             <div class="row">
+                <div class="col-md-12 padding-side-50 bg-color01">
+
+                   <div class="e-divider-4"></div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">PRESENCIA</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">IMAGEN</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-4">
+                      <h4 class="font-accident-two-normal e-uppercase">INAUGURACIONES</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+                   <div class="col-md-6 ">
+                      <h4 class="font-accident-two-normal e-uppercase">FIESTAS PRIVADAS</h4>
+                      <div class="e-divider-4"></div>
+                   </div>
+
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <section id="portfolio" class="e-block e-block-skin pt-section">
+    <div class="light">
+       <div class="container-fluid text-center padding-side-60">
+          <h3 class="font-accident-two-normal e-uppercase">GALERIA</h3>
+          <div class="e-divider-8"></div>
+       </div>
+       <div class="grid container-fluid ">
+          <div id="posts" class="row popup-container">
+            {%comment%}
+             <div class="grid-item grid-sizer posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/manelyk/1.jpg'%}" class="img-responsive" alt="manelyk"/>
+                   </figure>
+                </div>
+             </div>
+             <div class="grid-item media-objects misc col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/manelyk/2.jpg'%}" class="img-responsive" alt="manelyk"/>
+                   </figure>
+                </div>
+             </div>
+             <div class="grid-item posters col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/manelyk/3.jpg'%}" class="img-responsive" alt="manelyk"/>
+                   </figure>
+                </div>
+             </div>
+             <div class="grid-item posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/manelyk/4.jpg'%}" class="img-responsive" alt="manelyk"/>
+                   </figure>
+                </div>
+             </div>
+             <div class="grid-item posters media-objects col-lg-3 col-md-4 col-sm-6 nopadding">
+                <div class="item-wrap">
+                   <figure class="effect-goliath">
+                      <img src="{%static 'zaresapp/finezipo/assets/custom/images/manelyk/5.jpg'%}" class="img-responsive" alt="manelyk"/>
+                   </figure>
+                </div>
+             </div>
+             {%endcomment%}
+          </div>
+       </div>
+       <div class="e-divider-6"></div>
+    </div>
+ </section>
+ <!-- /Portfolio Block  -->
+{%endblock%}
+
+{%block js%}
+{%endblock%}
+
+{%block script%}
+{%endblock%}
+

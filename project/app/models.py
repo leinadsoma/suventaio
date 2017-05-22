@@ -371,4 +371,3 @@ class InvoiceClient(models.Model):
     estado = models.CharField('Estado', blank=True, null=True, max_length=250)
     codigo_postal = models.CharField('Codigo Postal', blank=True, null=True, max_length=250)
     pais = models.CharField('Pais', blank=True, null=True, max_length=250)
-

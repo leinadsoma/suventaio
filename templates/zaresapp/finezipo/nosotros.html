@@ -1,0 +1,42 @@
+{% extends "zaresapp/finezipo/base.html" %}
+
+{% load i18n %} 
+{% load staticfiles i18n %}
+
+{%block title%}FZ | Nosotros{%endblock%}
+
+{%block styles%}
+{%endblock%}
+
+{%block css%}
+#about-hero-image .hero-wrapper .hero-text, #portfolio-hero-image .hero-wrapper .hero-text, #blog-hero-image .hero-wrapper .hero-text, #contact-hero-image .hero-wrapper .hero-text, #blog-grid-hero-image .hero-wrapper .hero-text {
+    margin: 160px 0 170px 0;
+    padding: 24px 40px 32px 40px;
+    background: rgba(255, 255, 255, 0.70);
+}
+{%endblock%}
+
+{%block content%}
+  <section id="contact-hero-image">
+      <div class="layer"></div>
+      <div class="container-fluid hero-wrapper">
+         <div class="row text-right">
+            <div class="col-md-12">
+               <div class="hero-text">
+                  <h2 class="font-accident-two-normal">NOSOTROS</h2>
+                  <p class="font-accident-two-normal e-uppercase letter-spacing-03">
+                     Somos una empresa de management & PR  especualizada en la producción de eventos, conciertos, desarrollo de publicidad, operación de medios masivos de comunicación, relaciones públicas, montajes y decoraciones para ferias, carnavales y expos, manejando a su vez modelos profesionales y artistas de talla nacional e internacional.
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+{%endblock%}
+
+{%block js%}
+{%endblock%}
+
+{%block script%}
+{%endblock%}
+
