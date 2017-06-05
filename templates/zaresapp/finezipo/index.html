@@ -9,6 +9,9 @@
 {%endblock%}
 
 {%block css%}
+section {
+    background-color: #101010;
+}
 {%endblock%}
 
 {%block content%}
@@ -348,17 +351,9 @@
        <div class="grid container-fluid ">
 
           <div id="posts" class="row popup-container">
-
-            <a href="{%url 'finezipo_artistas' 'manelyk'%}">
-                <div class="grid-item posters misc col-lg-4 col-md-4 col-sm-6 nopadding">
-                    <div class="item-wrap">
-                       <figure class="effect-goliath">
-                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/01-01.jpg'%}" class="img-responsive img-models" alt="img11"/>
-                       </figure>
-                    </div>
-                </div>
-            </a>
-           
+            <div class="grid-item media-objects misc col-xs-12 nopadding">
+                <h2 class="text-center" style="color:#fff">MANAGEMENT</h2>
+            </div>
             <a href="{%url 'finezipo_artistas' 'lorena'%}">
                  <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
                     <div class="item-wrap">
@@ -377,15 +372,36 @@
                     </div>
                 </div>
             </a>
-             <a href="{%url 'finezipo_artistas' 'sabrina'%}">
-                 <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
+            <a href="{%url 'finezipo_artistas' 'manelyk'%}">
+                <div class="grid-item posters misc col-lg-4 col-md-4 col-sm-6 nopadding">
                     <div class="item-wrap">
                        <figure class="effect-goliath">
-                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/02-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/01-01.jpg'%}" class="img-responsive img-models" alt="img11"/>
                        </figure>
                     </div>
-                 </div>
+                </div>
             </a>
+
+            <a href="{%url 'finezipo_artistas' 'tracy'%}">
+                <div class="grid-item posters misc col-lg-4 col-md-4 col-sm-6 nopadding">
+                    <div class="item-wrap">
+                       <figure class="effect-goliath">
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/10-01.jpg'%}" class="img-responsive img-models" alt="img10"/>
+                       </figure>
+                    </div>
+                </div>
+            </a>
+
+            <a href="{%url 'finezipo_artistas' 'jenny'%}">
+                <div class="grid-item posters misc col-lg-4 col-md-4 col-sm-6 nopadding">
+                    <div class="item-wrap">
+                       <figure class="effect-goliath">
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/11-01.jpg'%}" class="img-responsive img-models" alt="img10"/>
+                       </figure>
+                    </div>
+                </div>
+            </a>
+
              <a href="{%url 'finezipo_artistas' 'esteban'%}">
                 <div class="grid-item grid-sizer posters col-lg-4 col-md-4 col-sm-6 nopadding">
                     <div class="item-wrap">
@@ -395,15 +411,16 @@
                     </div>
                 </div>
             </a>
-            
-             <a href="{%url 'finezipo_artistas' 'elettra'%}">
-                 <div class="grid-item posters media-objects col-lg-4 col-md-4 col-sm-6 nopadding">
+            <a href="{%url 'finezipo_artistas' 'fernando'%}">
+                 <div class="grid-item posters col-lg-4 col-md-4 col-sm-6 nopadding">
                     <div class="item-wrap">
                        <figure class="effect-goliath">
-                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/05-01.jpg'%}" class="img-responsive img-models" alt="img11"/>
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/07-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
                        </figure>
                     </div>
                  </div>
+            </a>
+            
             </a>
              <a href="{%url 'finezipo_artistas' 'jawi'%}">
                  <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
@@ -414,16 +431,65 @@
                     </div>
                  </div>
             </a>
-             <a href="{%url 'finezipo_artistas' 'fernando'%}">
-                 <div class="grid-item posters col-lg-4 col-md-4 col-sm-6 nopadding">
+
+            <a href="{%url 'finezipo_artistas' 'gemelos'%}">
+                 <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
                     <div class="item-wrap">
                        <figure class="effect-goliath">
-                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/07-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/12-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
                        </figure>
                     </div>
                  </div>
             </a>
-             <a href="{%url 'finezipo_artistas' 'igor'%}">
+            <div class="grid-item media-objects misc col-xs-12 nopadding">
+                <h2 class="text-center" style="color:#fff">BOOKING</h2>
+            </div>
+            <a href="{%url 'finezipo_artistas' 'lisvega'%}">
+                 <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
+                    <div class="item-wrap">
+                       <figure class="effect-goliath">
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/13-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
+                       </figure>
+                    </div>
+                 </div>
+            </a>
+            <a href="{%url 'finezipo_artistas' 'marlene'%}">
+                 <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
+                    <div class="item-wrap">
+                       <figure class="effect-goliath">
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/14-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
+                       </figure>
+                    </div>
+                 </div>
+            </a>
+            <a href="{%url 'finezipo_artistas' 'vanessahopenkoten'%}">
+                 <div class="grid-item posters media-objects col-lg-4 col-md-4 col-sm-6 nopadding">
+                    <div class="item-wrap">
+                       <figure class="effect-goliath">
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/16-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
+                       </figure>
+                    </div>
+                 </div>
+            </a>
+            <a href="{%url 'finezipo_artistas' 'sabrina'%}">
+                 <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
+                    <div class="item-wrap">
+                       <figure class="effect-goliath">
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/02-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
+                       </figure>
+                    </div>
+                 </div>
+            </a>
+            <a href="{%url 'finezipo_artistas' 'thalia'%}">
+                 <div class="grid-item media-objects misc col-lg-4 col-md-4 col-sm-6 nopadding">
+                    <div class="item-wrap">
+                       <figure class="effect-goliath">
+                          <img src="{%static 'zaresapp/finezipo/assets/custom/images/portfolio/thumbs/15-01.jpg'%}" class="img-responsive img-models" alt="img03"/>
+                       </figure>
+                    </div>
+                 </div>
+            </a>
+            <a href="{%url 'finezipo_artistas' 'igor'%}">
                  <div class="grid-item posters media-objects col-lg-4 col-md-4 col-sm-6 nopadding">
                     <div class="item-wrap">
                        <figure class="effect-goliath">
@@ -432,8 +498,6 @@
                     </div>
                  </div>
             </a>
-
-             
           </div>
        </div>
     </div>

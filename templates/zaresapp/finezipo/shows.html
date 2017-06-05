@@ -1,0 +1,80 @@
+{% extends "zaresapp/finezipo/base.html" %}
+
+{% load i18n %} 
+{% load staticfiles i18n %}
+
+{%block title%}FZ | Nosotros{%endblock%}
+
+{%block styles%}
+{%endblock%}
+
+{%block css%}
+#about-hero-image .hero-wrapper .hero-text, #portfolio-hero-image .hero-wrapper .hero-text, #blog-hero-image .hero-wrapper .hero-text, #contact-hero-image .hero-wrapper .hero-text, #blog-grid-hero-image .hero-wrapper .hero-text {
+    margin: 0px 0 170px 0;
+    padding: 24px 40px 32px 40px;
+    background: rgba(255, 255, 255, 0.70);
+}
+#contact-hero-image::before {
+    background: url("{%static 'zaresapp/finezipo/assets/custom/images/backgrounds/11.jpg'%}") no-repeat center center;
+    background-size: cover;
+}
+.navbar .navbar-nav > li > a {
+    color: #000;
+}
+.navbar h1 a{
+    color: #000;
+}
+.navbar h1 small{
+    color: #000;
+}
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+#about-hero-image .hero-wrapper .hero-text, #portfolio-hero-image .hero-wrapper .hero-text, #blog-hero-image .hero-wrapper .hero-text, #contact-hero-image .hero-wrapper .hero-text, #blog-grid-hero-image .hero-wrapper .hero-text {
+    margin: 0px 0 170px 0;
+    padding: 24px 40px 32px 40px;
+    background: rgba(50, 50, 50, 0.7);
+}
+{%endblock%}
+
+{%block content%}
+  <section id="contact-hero-image">
+      <div class="layer"></div>
+      <div class="container-fluid hero-wrapper">
+         <div class="row text-right">
+            <div class="col-md-12">
+               <div class="hero-text">
+                  <h2 class="font-accident-two-normal" style="color:#fff">SHOWS</h2>
+                  <div class="grid container-fluid ">
+                   <div class="grid-item grid-sizer posters media-objects col-lg-5 col-md-6 col-sm-6 nopadding">
+                      <div class="item-wrap">
+                         <figure class="effect-goliath">
+                            <img src="{%static 'zaresapp/finezipo/assets/custom/images/tours/COMADRESTOUR-01.png'%}" class="img-responsive" alt="1"/>
+                         </figure>
+                      </div>
+                   </div>
+                   <div class="grid-item grid-sizer posters media-objects col-lg-5 col-md-6 col-sm-6 nopadding">
+                      <div class="item-wrap">
+                         <figure class="effect-goliath">
+                            <img src="{%static 'zaresapp/finezipo/assets/custom/images/tours/DESNUDAMETOUR-01.png'%}" class="img-responsive" alt="1"/>
+                         </figure>
+                      </div>
+                   </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+   </section>
+{%endblock%}
+
+{%block js%}
+{%endblock%}
+
+{%block script%}
+{%endblock%}
+

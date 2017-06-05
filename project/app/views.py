@@ -25,8 +25,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context, Template
-from django.core.mail import EmailMultiAlternatives
-from config.settings import DEFAULT_FROM_EMAIL, SITE_ID, PRODUCTION
+from django.core.mail import EmailMultiAlternatives, get_connection
+from config.settings import DEFAULT_FROM_EMAIL, SITE_ID, PRODUCTION, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT, EMAIL_USE_TLS
 from django.contrib.auth.decorators import login_required
 import urllib
 from django.http import Http404 
@@ -82,6 +82,10 @@ def index(request):
 	if request.user.is_anonymous():
 		domain = get_domain(request)
 		if domain == 'finezipo.com' or 'www.finezipo.com' or 'localhost:8000':
+			return render(request, 'zaresapp/finezipo/index.html',locals())
+		elif domain == 'vamico.mx.com' or 'www.vamico.mx.com':
+			return render(request, 'zaresapp/vamico/index.html',locals())
+		elif domain == 'finezipo.com' or 'www.finezipo.com' or 'localhost:8000':
 			return render(request, 'zaresapp/finezipo/index.html',locals())
 		else:
 			return render(request, 'app/landing.html',locals())
@@ -644,6 +648,8 @@ def invoice_sellpoint_form(request, acction):
 	else:
 		raise Http404
 
+####FINEZIPO
+
 def finezipo_nosotros(request):
 	return render(request, 'zaresapp/finezipo/nosotros.html',locals())
 
@@ -651,9 +657,18 @@ def finezipo_artistas(request, artista):
 	if artista == 'manelyk':
 		artista = 'Manelyk'
 		return render(request, 'zaresapp/finezipo/manelik.html',locals())
-	if artista == 'sabrina':
-		artista = 'Sabrina'
-		return render(request,'zaresapp/finezipo/sabrina.html',locals())
+	if artista == 'tracy':
+		artista = 'Tracy Sáenz'
+		return render(request, 'zaresapp/finezipo/tracy.html',locals())
+	if artista == 'jenny':
+		artista = 'Jenny Garcia'
+		return render(request, 'zaresapp/finezipo/jenny.html',locals())
+	if artista == 'gemelos':
+		artista = 'GEMELOS'
+		return render(request, 'zaresapp/finezipo/gemelos.html',locals())
+	if artista == 'sabrinasabrok':
+		artista = 'Sabrina Sabrok'
+		return render(request,'zaresapp/finezipo/sabrinasabrok.html',locals())
 	if artista == 'lorena':
 		artista = 'Lorena Herrera'
 		return render(request,'zaresapp/finezipo/lorena.html',locals())
@@ -675,8 +690,40 @@ def finezipo_artistas(request, artista):
 	if artista == 'vanessa':
 		artista = 'Vanessa Claudio'
 		return render(request,'zaresapp/finezipo/vanessa.html',locals())
+	if artista == 'lisvega':
+		artista = 'Lis Vega'
+		return render(request,'zaresapp/finezipo/lisvega.html',locals())
+	if artista == 'marlenefavela':
+		artista = 'MAarlene Favela'
+		return render(request,'zaresapp/finezipo/marlenefavela.html',locals())
+	if artista == 'vanessahuppenkothen':
+		artista = 'Vanessa Huppenkothen'
+		return render(request,'zaresapp/finezipo/vanessahuppenkothen.html',locals())
+	if artista == 'talia':
+		artista = 'Talia Acashore'
+		return render(request,'zaresapp/finezipo/talia.html',locals())
 
 def finezipo_contacto(request):
+	if request.method == "POST":
+		nombre = request.POST.get('nombre')
+		email = request.POST.get('email')	
+		empresa = request.POST.get('empresa')
+		mensaje = request.POST.get('mensaje')
+		subject, from_email, to = 'Contacto Finezipo', 'finezipo@zaresapp.com <FineZipo>', 'rampzodia1@gmail.com'
+		text_content = 'TIENES UNA NUEVA FORMA DE CONTACTO'
+		html_content = '<h2>TIENES UNA NUEVA FORMA DE CONTACTO</h2>'+'<p><strong>Nombre:</strong> ' + unicode(nombre) + '</p>'+'<p><strong>Email:</strong> ' + unicode(email) + '</p>'+'<p><strong>Empresa:</strong> ' + unicode(empresa) + '</p>'+'<p><strong>Mensaje:</strong> ' + unicode(mensaje) + '</p>'
+		msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+		msg.attach_alternative(html_content, "text/html")
+		msg.send()
+		mensaje = "Nos pondremos pronto en contacto contigo. :)"
 	return render(request, 'zaresapp/finezipo/contacto.html',locals())
 
+def finezipo_que_hacemos(request):
+	return render(request, 'zaresapp/finezipo/que_hacemos.html',locals())
+
+def finezipo_shows(request):
+	return render(request, 'zaresapp/finezipo/shows.html',locals())
+
+
+####VAMICO
 

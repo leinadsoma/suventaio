@@ -1,0 +1,48 @@
+{% extends "zaresapp/finezipo/base.html" %}
+
+{% load i18n %} 
+{% load staticfiles i18n %}
+
+{%block title%}FZ | Nosotros{%endblock%}
+
+{%block styles%}
+
+{%endblock%}
+
+{%block css%}
+#about-hero-image .hero-wrapper .hero-text, #portfolio-hero-image .hero-wrapper .hero-text, #blog-hero-image .hero-wrapper .hero-text, #contact-hero-image .hero-wrapper .hero-text, #blog-grid-hero-image .hero-wrapper .hero-text {
+    margin: 160px 0 170px 0;
+    padding: 24px 40px 32px 40px;
+    background: rgba(255, 255, 255, 0.70);
+}
+#contact-hero-image::before {
+    background: url("{%static 'zaresapp/finezipo/assets/custom/images/backgrounds/10.jpg'%}") no-repeat center center;
+    background-size: cover;
+}
+
+{%endblock%}
+
+{%block content%}
+  <section id="contact-hero-image">
+      <div class="layer"></div>
+      <div class="container-fluid hero-wrapper">
+         <div class="row text-right">
+            <div class="col-md-12">
+               <div class="hero-text">
+                  <h2 class="font-accident-two-normal">QUE HACEMOS?</h2>
+                  <p class="font-accident-two-normal e-uppercase letter-spacing-03">
+                     REPRESENTACION Y COMERCIALIZACION ARTISTICA, LOGISTICA, PRO- DUCCIONES, SHOWCASE, CONFERENCIAS, CARNAVALES, FIRMA DE AUTOGRAFOS, CAM- PAÑAS PUBLICITARIAS, PRESENCIAS, INAUGURACIONES, SOCIAL MEDIA, FIESTAS PRIVADAS, RELACIONES PUBLICAS, PRENSA Y BOOKING.
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+{%endblock%}
+
+{%block js%}
+{%endblock%}
+
+{%block script%}
+{%endblock%}
+

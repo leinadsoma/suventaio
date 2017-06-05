@@ -7,7 +7,7 @@
 <html class="ie8" lang="en">    <![endif]-->
 <head>
 
-   <title>{%block title%}FZ | FineZipo{%endblock%}</title>
+   <title>{%block title%}FZ | Fine&Zipo{%endblock%}</title>
 
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,27 @@
     -webkit-filter: initial;
     filter: initial;
 }
-
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 3px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+.dropdown-menu > li > a {
+    padding: 5px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #dadada;
+}
+.sidebar-left .bottom-widget {
+    background: #1e1e1e;
+    position: absolute;
+    width: 300px;
+    bottom: 0;
+    padding: 30px;
+    color: #fff;
+}
   {%block css%}
   {%endblock%}
 
@@ -114,27 +134,27 @@
       <ul class="sidebar-nav">
          <li class="e-divider-4"></li>
          <li class="sidebar-brand">
-            <a href="#"><img src="{%static 'zaresapp/finezipo/assets/custom/images/logo02.png'%}" width="180" alt="logo"></a>
-            <span style="color:#fff;font-size:21px;margin-left: -5px;">MANAGEMENT & PR</span>
+            <a href="/"><img src="{%static 'zaresapp/finezipo/assets/custom/images/logo02.png'%}" width="180" alt="logo"></a>
+            <span style="color:#fff;font-size:21px;margin-left: -5px;">MANAGMENT & PR</span>
          </li>
          <li class="e-divider-4"></li>
-         <li><a href="/" class="current">Inicio</a></li>
          <li><a href="{%url 'finezipo_nosotros'%}">Nosotros</a></li>
+         <li><a href="{%url 'finezipo_que_hacemos'%}">Que hacemos?</a></li>
+         <li><a href="{%url 'finezipo_shows'%}">Shows</a></li>
          <li><a href="{%url 'finezipo_contacto'%}">Contacto</a></li>
       </ul>
       <div class="bottom-widget">
          <p class="small">
-            © 2017 FineZipo.
+          CONTACTO:
+          <br /><small style="font-size:15px;">fine.zipo@gmail.com</small>
+          <br /><small style="font-size:20px;">5534142088</small>
          </p>
          <p class="small">
             Siguenos en nuestras redes
          </p>
          <div>
-            <a href="#!"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-            <a href="#!"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-            <a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a href="#!"><i class="fa fa-snapchat-square" aria-hidden="true"></i></a>
-            <a href="#!"><i class="fa fa-tumblr-square" aria-hidden="true"></i></a>
+            <a href="http://facebook.com/fine.zipo/"><i class="fa fa-facebook-square" aria-hidden="true"></i> <small style="color: #fff;">fine.zipo</small></a>
+            <a href="http://instagram.com/joeles6/"><i class="fa fa-instagram" aria-hidden="true"></i> <small style="color: #fff;">@joeles6</small></a>
          </div>
          <p class="small">
             <a href="http://zaresdelweb.com" style="color: #474545;">powered by zaresdelweb</a>
@@ -142,7 +162,6 @@
       </div>
    </div>
    <!-- /#sidebar-wrapper -->
-
    <!-- Content -->
    <div id="page-content-wrapper" class="content-wrap">
 
@@ -154,7 +173,7 @@
                   <!-- Brand and toggle get grouped for better mobile display -->
                   <div class="navbar-header">
                      <h1>
-                      <a href="/" style="">FINEZIPO<br /><small style="font-size:17px;font-weight: 100;">MANAGEMENT & PR</small></a>
+                      <a href="/" style="">FINE&ZIPO<br /><small style="font-size:17px;font-weight: 100;">MANAGMENT & PR</small></a>
                       </h1>
                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -168,17 +187,29 @@
                      <ul class="nav navbar-nav navbar-right">
                         <li><a href="{%url 'finezipo_nosotros'%}">Nosotros</a></li>
                         <li class="dropdown">
-                           <a class="dropdown-toggle" data-toggle="dropdown">Artistas <b class="caret"></b></a>
+                           <a class="dropdown-toggle" data-toggle="dropdown">TALENTOS <b class="caret"></b></a>
                            <ul class="dropdown-menu">
+                              <li role="separator" class="divider"></li>
+                              <li><a style="color: #b9b874;">MANAGEMENT</a></li>
+                              <li role="separator" class="divider"></li>
                               <li><a href="{%url 'finezipo_artistas' 'lorena'%}">LORENA HERRERA</a></li>
-                              <li><a href="{%url 'finezipo_artistas' 'manelyk'%}">MANELIK</a></li>
-                              <li><a href="{%url 'finezipo_artistas' 'vanessa'%}">VANESSA CLAUDIO</a></li> 
-                              <li><a href="{%url 'finezipo_artistas' 'sabrina'%}">SABRINA</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'vanessa'%}">VANESSA CLAUDIO</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'manelyk'%}">MANELYK GONZÁLES</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'tracy'%}">TRACY SÁENZ</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'jenny'%}">JENNY GARCIA</a></li>
                               <li><a href="{%url 'finezipo_artistas' 'esteban'%}">ESTEBAN MARTINEZ</a></li>
-                              <li><a href="{%url 'finezipo_artistas' 'elettra'%}">ELETTRA LAMBORGHINI</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'fernando'%}">FERNANDO LOZADA</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'jawi'%}">JAWI</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'gemelos'%}">GEMELOS</a></li>
+                              <li role="separator" class="divider"></li>
+                              <li><a style="color: #b9b874;">BOOKING</a></li>
+                              <li role="separator" class="divider"></li>
+                              <li><a href="{%url 'finezipo_artistas' 'lisvega'%}">LIS VEGA</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'marlenefavela'%}">MARLENE FAVELA</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'vanessahuppenkothen'%}">VANESSA HUPPENKOTHEN</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'sabrinasabrok'%}">SABRINA SABROK</a></li>
+                              <li><a href="{%url 'finezipo_artistas' 'talia'%}">TALIA ACASHORE</a></li>
                               <li><a href="{%url 'finezipo_artistas' 'igor'%}">IGOR SUPER SHORE BRASIL</a></li>
-                              <li><a href="{%url 'finezipo_artistas' 'fernando'%}">FERNANDO</a></li>  
-                              <li><a href="{%url 'finezipo_artistas' 'jawi'%}">JAWI</a></li>  
                            </ul>
                         </li>
                         <li><a href="{%url 'finezipo_contacto'%}">Contacto</a></li>
@@ -189,7 +220,6 @@
          </div>
       </header>
       <!-- / Header -->
-
       <!-- Content Sections -->
       <div id="content">
 
@@ -200,6 +230,9 @@
       <!-- /Content Sections -->
    </div>
    <!-- /Content -->
+</div>
+
+<div id="frames">
 </div>
 
 <!-- JS -->
@@ -233,6 +266,20 @@
 {%block js%}{%endblock%}
 
 {%block script%}{%endblock%}
+
+<script>
+
+  $( ".downloadimg" ).click(function() {
+    image = $(this).attr('src')
+    console.log(image)
+    downloadimg(image)
+  });
+  
+  function downloadimg(image){
+    $('body').append('<iframe src="http://localhost:8000'+ image +'" style="display: none;" ></iframe>');
+  }
+ 
+</script>
 
 </body>
 </html>

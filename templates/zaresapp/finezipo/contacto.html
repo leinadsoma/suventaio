@@ -98,24 +98,28 @@
   <section class="e-block-short bg-color01">
     <div class="container-fluid padding-side-50">
        <div class="e-divider-2"></div>
-       <form action="#" method="post" novalidate="novalidate">
-          <div class="row">
-             <div class="col-md-4">
-                <p><label>Tu Nombre*</label><input type="text" name="Ingresa tu nombre" value="" size="60" class="" aria-required="true" aria-invalid="false"></p>
-             </div>
-             <div class="col-md-4">
-                <p><label>Tu Email*</label><input type="text" name="Ingresa tu email" value="" size="60" class="" aria-required="true" aria-invalid="false"></p>
-             </div>
-             <div class="col-md-4">
-                <p><label>Tu Empresa</label><input type="text" name="Ingresa el nombre de tu empresa" value="" size="60" class="" aria-required="true" aria-invalid="false"></p>
-             </div>
-             <div class="col-md-12">
-                <p><label>Tu Mensaje</label><textarea name="Ingresa tu mensaje" cols="60" rows="3" class="" aria-invalid="false"></textarea></p>
-             </div>
-          </div>
-          <div class="e-divider-2"></div>
-          <p><button type="button" class="btn btn-lg btn-blk">CONTACTARME</button></p>
-       </form>
+        {%if not mensaje%}
+           <form id="form" method="post" enctype="multipart/form-data" class="m-t">{% csrf_token %}
+              <div class="row">
+                 <div class="col-md-4">
+                    <p><label>Tu Nombre*</label><input type="text" name="nombre" placeholdeer="Ingresa tu nombre" value="" size="60" class="" aria-required="true" aria-invalid="false"></p>
+                 </div>
+                 <div class="col-md-4">
+                    <p><label>Tu Email*</label><input type="text" name="email" placeholdeer="Ingresa tu email" value="" size="60" class="" aria-required="true" aria-invalid="false"></p>
+                 </div>
+                 <div class="col-md-4">
+                    <p><label>Tu Empresa</label><input type="text" name="empresa" placeholdeer="Ingresa el nombre de tu empresa" value="" size="60" class="" aria-required="true" aria-invalid="false"></p>
+                 </div>
+                 <div class="col-md-12">
+                    <p><label>Tu Mensaje</label><textarea  name="mensaje" placeholdeer="Ingresa tu mensaje" cols="60" rows="3" class="" aria-invalid="false"></textarea></p>
+                 </div>
+              </div>
+              <div class="e-divider-2"></div>
+              <p><button type="submit" class="btn btn-lg btn-blk">CONTACTARME</button></p>
+           </form>
+        {%else%}
+            <h4>{{mensaje}}</h4>
+        {%endif%}
     </div>
   </section>
 {%endblock%}

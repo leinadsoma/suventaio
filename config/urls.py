@@ -55,7 +55,8 @@ urlpatterns = [
     url(r'^finezipo/nosotros/$', finezipo_nosotros, name='finezipo_nosotros'),
     url(r'^finezipo/artistas/(.+)/$', finezipo_artistas, name='finezipo_artistas'),
     url(r'^finezipo/contacto/$', finezipo_contacto, name='finezipo_contacto'),
-
+    url(r'^finezipo/que-hacemos/$', finezipo_que_hacemos, name='finezipo_que_hacemos'),
+    url(r'^finezipo/shows/$', finezipo_shows, name='finezipo_shows'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
