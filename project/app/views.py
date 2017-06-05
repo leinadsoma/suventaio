@@ -709,7 +709,7 @@ def finezipo_contacto(request):
 		email = request.POST.get('email')	
 		empresa = request.POST.get('empresa')
 		mensaje = request.POST.get('mensaje')
-		subject, from_email, to = 'Contacto Finezipo', 'finezipo@zaresapp.com', 'rampzodia1@gmail.com'
+		subject, from_email, to = 'Contacto Finezipo', 'finezipo@zaresapp.com', 'fine.zipo@gmail.com'
 		text_content = 'TIENES UNA NUEVA FORMA DE CONTACTO'
 		html_content = '<h2>TIENES UNA NUEVA FORMA DE CONTACTO</h2>'+'<p><strong>Nombre:</strong> ' + unicode(nombre) + '</p>'+'<p><strong>Email:</strong> ' + unicode(email) + '</p>'+'<p><strong>Empresa:</strong> ' + unicode(empresa) + '</p>'+'<p><strong>Mensaje:</strong> ' + unicode(mensaje) + '</p>'
 		msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
