@@ -81,9 +81,7 @@ def landing(request):
 def index(request):
 	if request.user.is_anonymous():
 		domain = get_domain(request)
-		if domain == 'finezipo.com' or 'www.finezipo.com' or 'localhost:8000':
-			return render(request, 'zaresapp/finezipo/index.html',locals())
-		elif domain == 'vamico.mx.com' or 'www.vamico.mx.com':
+		if domain == 'vamico.mx.com' or 'www.vamico.mx.com':
 			return render(request, 'zaresapp/vamico/index.html',locals())
 		elif domain == 'finezipo.com' or 'www.finezipo.com' or 'localhost:8000':
 			return render(request, 'zaresapp/finezipo/index.html',locals())
