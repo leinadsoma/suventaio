@@ -36,10 +36,7 @@ from django.utils.crypto import get_random_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def get_domain(request):
-	domain = request.META['HTTP_HOST'].split('.')[0]
-	if domain == 'localhost:8000' or domain == 'zaresapp' or domain == 'suventa':
-		domain = 'zaresapp'
-	return domain
+	return request.META['HTTP_HOST'].split('.')[0]
 
 def user_login(request):
 	domain = get_domain(request)
@@ -81,10 +78,9 @@ def landing(request):
 def index(request):
 	if request.user.is_anonymous():
 		domain = get_domain(request)
-		
-		if domain == 'finezipo.com' or 'www.finezipo.com' or 'localhost:8000':
+		if domain == 'finezipo' or 'localhost:8000':
 			return render(request, 'zaresapp/finezipo/index.html',locals())
-		elif domain == 'vamico.mx.com' or 'www.vamico.mx.com':
+		elif domain == 'vamico':
 			return render(request, 'zaresapp/vamico/index.html',locals())
 		else:
 			return render(request, 'app/landing.html',locals())
