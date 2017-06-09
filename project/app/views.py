@@ -79,7 +79,7 @@ def index(request):
 	if request.user.is_anonymous():
 		domain = get_domain(request)
 		try:
-			if domain[0] == 'vamico':
+			if domain[0] == 'vamico' or domain[0] == 'localhost:8000':
 				return render(request, 'zaresapp/vamico/index.html',locals())
 			if domain[1] == 'vamico':
 				return render(request, 'zaresapp/vamico/index.html',locals())

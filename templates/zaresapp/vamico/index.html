@@ -27,8 +27,12 @@
       <script src="assets/plugins/respond.min.js"></script>
     <![endif]-->
     <style>
+    .block-section.bg-theme, .content-section.bg-theme {
+        color: #fff;
+        background-color: #ffc24b;
+    }
     .site-branding .site-title.title-image img {
-        max-height: 60px;
+        max-height: 100px;
         width: auto;
         margin-bottom: 5px;
     }
@@ -44,6 +48,32 @@
     hr {
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+    .header-caption .header-action-button .btn {
+        margin-right: 20px;
+        padding: 10px 18px;
+        border: 2px solid #fff;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        -ms-border-radius: 25px;
+        -o-border-radius: 25px;
+        border-radius: 25px;
+        text-transform: uppercase;
+        font-size: 13px;
+    }
+    .dropdown-menu > li > a:hover {
+        background-color: #202020;
+        background-image: none;
+    }
+
+    .main-navigation .current-menu-ancestor>a, .main-navigation .current-menu-item>a, .main-navigation .current_page_ancestor>a, .main-navigation .current_page_item>a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .btn-warning {
+        color: #fff;
+        background-color: #c7882e;
+        border-color: #c7882e;
     }
     </style>
   </head>
@@ -62,7 +92,6 @@
             <div class="col-sm-4 hidden-xs">
               <div class="nav-utility nav-right">
                 <a href="#" class="nav-item"><i class="fa fa-facebook"></i></a>
-                <a href="#" class="nav-item"><i class="fa fa-youtube"></i></a>
               </div><!-- .nav-utility -->
             </div><!-- .col-sm-4 -->
           </div><!-- .row -->
@@ -89,8 +118,22 @@
                   </button>
                   <div class="menu-testing-menu-container">
                     <ul id="primary-menu" class="menu nav-menu" aria-expanded="false">
-                      <li class="menu-item current-menu-item"><a href="#home">INICIO</a></li>
-                      <li class="menu-item"><a href="#products">Productos</a></li>
+                        <li class="dropdown">
+                         <a class="dropdown-toggle" data-toggle="dropdown">PRODUCTOS <b class="caret"></b></a>
+                         <ul class="dropdown-menu">
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#bolas">BOLAS API 6D</a></li>
+                            <li><a href="#commodity">COMMODITY</a></li>
+                            <li><a href="#compuertas">COMPUERTAS API 6D</a></li>
+                            <li><a href="#mariposas">MARIPOSAS</a></li>
+                            <li><a href="#submarinas">SUBMARINAS API 6DSS</a></li>
+                            <li><a href="#automaticas">AUTOMÁTICAS</a></li>
+                            <li><a href="#bridas">BRIDAS Y CONEXIONES</a></li>
+                            <li><a href="#tuberia">TUBERÍA ESPECIAL</a></li>
+                         </ul>
+                      </li>
+                      <li class="menu-item"><a href="#nosotros">Nosotros</a></li>
+                      <li class="menu-item"><a href="#marcas">Marcas</a></li>
                       <li class="menu-item"><a href="#contact">Contacto</a></li>
                     </ul>
                   </div>
@@ -109,7 +152,8 @@
               <h2 class="caption-title">SERVICIO SUPERIOR EN EL ABASTECIMIENTO, DE VÁLVULAS, BRIDAS, CONEXIONES, Y TUBERIA ESPECIAL.</h2>
               <p>Somos una empresa formada en 1990 por un grupo de ingenieros de alto nivel y experiencia en las industrias del petróleo, gas, agua, eléctrica, con presencia principalmente en la industria Off-Shore, la Petroquímica y Refinación en general.</p>
               <div class="header-action-button">
-                <a class="btn btn-warning btn-md" href="#products">Conocer Más</a>
+                <a class="btn btn-warning btn-md" href="#products">Descargar catalogo</a>
+                <a class="btn btn-warning btn-md" href="#products">Contactanos <i class="fa fa-envelope"></i></a>
               </div><!-- header-action-button -->
             </div><!-- .header-caption -->
           </div><!-- .col-sm-5 -->
@@ -118,56 +162,7 @@
     </div><!-- #header -->
     <!-- end:header -->
 
-    <!-- begin:additional-info -->
-    <div id="additional-info" class="additional-info block-section bg-grey padd-20-top padd-40-btm">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-sm-6">
-            <div class="contact-item">
-              <div class="contact-item-icon">
-                <i class="fa fa-phone"></i>
-              </div><!-- .contact-item-icon -->
-              <h4 class="contact-item-title">Número de teléfono:</h4>
-              <div class="contact-item-info">+52 (55 5 445 1880) 5445-1880</div>
-              <div class="contact-item-info">+52 (55 5 445 1880) 5697-9711</div>
-            </div><!-- .contact-item -->
-          </div><!-- .col-# -->
-
-          <div class="col-md-3 col-sm-6">
-            <div class="contact-item">
-              <div class="contact-item-icon">
-                <i class="fa fa-envelope-o"></i>
-              </div><!-- .contact-item-icon -->
-              <h4 class="contact-item-title">Correo electrónico:</h4>
-              <div class="contact-item-info">info@vamicomx.com</div>
-            </div><!-- .contact-item -->
-          </div><!-- .col-# -->
-
-          <div class="col-md-3 col-sm-6">
-            <div class="contact-item">
-              <div class="contact-item-icon">
-                <i class="fa fa-map-marker"></i>
-              </div><!-- .contact-item-icon -->
-              <h4 class="contact-item-title">Dirección:</h4>
-              <div class="contact-item-info">Cuicacalli Mzna 23 Lote 1</div>
-              <div class="contact-item-info">Estrella del Sur, Iztapalapa</div>
-              <div class="contact-item-info">CP 09820, CDMX, MÉXICO</div>
-            </div><!-- .contact-item -->
-          </div><!-- .col-# -->
-
-          <div class="col-md-3 col-sm-6">
-            <div class="contact-item">
-              <div class="contact-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </div><!-- .contact-item-icon -->
-              <h4 class="contact-item-title">Horaios:</h4>
-              <div class="contact-item-info">Lun - Vie: 9:00 am - 6:00 pm </div>
-            </div><!-- .contact-item -->
-          </div><!-- .col-# -->
-        </div><!-- .row -->
-      </div><!-- container -->
-    </div><!-- #additional-info -->
-    <!-- end:additional-info -->
+    
 
     <!-- begin:cta -->
     <div id="cta" class="cta block-section padd-40-top padd-40-btm bg-dark" style="padding: 20px;">
@@ -176,6 +171,14 @@
           <div class="col-sm-12s">
             <h4>Por qué <strong>VAMICO</strong> es la mejor solución para mis proyectos?</h4>
             <p>Contámos con representaciones y alianzas estratégicas con compañías de alto prestigio a nivel mundial dentro de la indústria; así como acuerdos con empresas que cuentan con un stock disponible de 30 a 40 millones de dólares, lo que nos convierte en la mejor opción para ofrecer válvulas con tiempos de entrega muy cortos y urgentes.</p>
+            
+            <h3 style="margin-bottom:20px;">Te gustaria saber mas de nosotros?</h3>
+            <a style="margin-bottom:20px;background-color: #c7882e;border-color: #c7882e;" class="btn btn-warning btn-md btn-outline" href="{%static 'zaresapp/vamico/assets/docs/CV-Vamico.docx'%}" download>Descargar CV de la empresa</a>
+
+            <hr />
+
+            <h1 class="text-center">NUESTROS PRODUCTOS</h1>
+
           </div><!-- .col-sm-6 -->
         </div><!-- .row -->
       </div><!-- .container -->
@@ -184,7 +187,7 @@
 
     <!-- begin:about -->
     <div id="products" class="block-section image-block">
-      <div class="container-fluid">
+      <div class="container-fluid" id="bolas">
         <div class="row">
           <div class="image-block-item col-md-6 col-sm-5 col-xs-12">
             <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-content-01.jpg'%}');"></div>
@@ -219,7 +222,7 @@
     <!-- end:about -->
 
     <!-- begin:testimonial -->
-    <div id="testimonial" class="block-section image-block bg-white">
+    <div id="commodity" class="block-section image-block bg-white">
       <div class="container-fluid container-no-padding">
         <div class="row row-no-margin">
           <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
@@ -264,7 +267,7 @@
     <!-- end:testimonial -->
 
     <!-- begin:about -->
-    <div id="about" class="block-section image-block">
+    <div id="compuertas" class="block-section image-block">
       <div class="container-fluid">
         <div class="row">
           <div class="image-block-item col-md-6 col-sm-5 col-xs-12">
@@ -298,7 +301,7 @@
     <!-- end:about -->
 
     <!-- begin:testimonial -->
-    <div id="testimonial" class="block-section image-block bg-white">
+    <div id="mariposas" class="block-section image-block bg-white">
       <div class="container-fluid container-no-padding">
         <div class="row row-no-margin">
           <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
@@ -334,7 +337,7 @@
     <!-- end:testimonial -->
 
     <!-- begin:about -->
-    <div id="about" class="block-section image-block">
+    <div id="submarinas" class="block-section image-block">
       <div class="container-fluid">
         <div class="row">
           <div class="image-block-item col-md-6 col-sm-5 col-xs-12">
@@ -375,7 +378,7 @@
     <!-- end:about -->
 
     <!-- begin:testimonial -->
-    <div id="testimonial" class="block-section image-block bg-white">
+    <div id="automaticas" class="block-section image-block bg-white">
       <div class="container-fluid container-no-padding">
         <div class="row row-no-margin">
           <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
@@ -412,7 +415,7 @@
     <!-- end:testimonial -->
 
     <!-- begin:about -->
-    <div id="about" class="block-section image-block">
+    <div id="bridas" class="block-section image-block">
       <div class="container-fluid">
         <div class="row">
           <div class="image-block-item col-md-6 col-sm-5 col-xs-12">
@@ -447,7 +450,7 @@
     <!-- end:about -->
 
     <!-- begin:testimonial -->
-    <div id="testimonial" class="block-section image-block bg-white">
+    <div id="tuberia" class="block-section image-block bg-white">
       <div class="container-fluid container-no-padding">
         <div class="row row-no-margin">
           <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
@@ -472,34 +475,7 @@
     </div><!-- #testimonial -->
     <!-- end:testimonial -->
 
-    <!-- begin:contact -->
-    <div id="contact" class="contact image-block">
-      <div class="container clear">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0 padd-40-top padd-80-btm">
-            <h2>CONTACTO</h2>
-            <p>Ingresa tus datos, nos pondremos en contacto contigo a la brevedad.</p>
-            <form class="contact-form">
-              <div class="form-group">
-                <label for="contact_name">Nombre</label>
-                <input type="text" class="form-control form-bordered" id="contact_name">
-              </div>
-              <div class="form-group">
-                <label for="contact_email" class="form-label">Email</label>
-                <input type="email" class="form-control form-bordered" id="contact_email">
-              </div>
-              <div class="form-group">
-                <label for="contact_message" class="form-label">Mensaje</label>
-                <textarea class="form-control form-bordered" rows="6" id="contact_message"></textarea>
-              </div>
-              <button type="submit" class="button btn-squar btn-roundede">Enviar Mensaje</button>
-            </form><!-- .contact-form -->
-          </div><!-- .col-## -->
-        </div><!-- .row -->
-      </div><!-- .container -->
-    </div><!-- #contact -->
-    <!-- end:contact -->
-
+    {%comment%}
     <!-- begin:client -->
     <div id="client" class="client block-section bg-white padd-20-top padd-20-btm">
       <div class="container">
@@ -573,17 +549,197 @@
       </div><!-- .container -->
     </div><!-- #client -->
     <!-- end:client -->
+    {%endcomment%}
 
-    <!-- begin:footer -->
-    <footer id="colophon" class="site-footer bg-black" role="contentinfo">
+    <div id="marcas" class="why content-section bg-grey">
       <div class="container">
         <div class="row">
+          <div class="col-md-12">
+            <div class="section-title">
+              <h2>NUESTRAS MARCAS</h2>
+            </div>
+            <p>VAMICO S.A. DE C.V., es el representante y vendedor de las marcas antes mencionados para el territorio mexicano. El origen italiano, japonés y americano de alto nivel de calidad es reconocido a nivel internacional y a su vez bien aceptado por nuestros clientes locales</p>
+          </div><!-- .col-md-12 -->
+        </div><!-- .row -->
+
+        <div class="row">
+          <div class="col-md-2 col-sm-4">
+            <div class="process-item highlight text-center">
+              <img src="{%static 'zaresapp/vamico/assets/img/img-work-01.jpg'%}" class="img-responsive">
+            </div><!-- .process-item -->
+          </div><!-- .col-## -->
+          <div class="col-md-2 col-sm-4">
+            <div class="process-item highlight text-center">
+              <img src="{%static 'zaresapp/vamico/assets/img/img-work-02.jpg'%}" class="img-responsive">
+            </div><!-- .process-item -->
+          </div><!-- .col-## -->
+          <div class="col-md-2 col-sm-4">
+            <div class="process-item highlight text-center">
+              <img src="{%static 'zaresapp/vamico/assets/img/img-work-03.jpg'%}" class="img-responsive">
+            </div><!-- .process-item -->
+          </div><!-- .col-## -->
+          <div class="col-md-2 col-sm-4">
+            <div class="process-item highlight text-center">
+              <img src="{%static 'zaresapp/vamico/assets/img/img-work-04.jpg'%}" class="img-responsive">
+            </div><!-- .process-item -->
+          </div><!-- .col-## -->
+          <div class="col-md-2 col-sm-4">
+            <div class="process-item highlight text-center">
+              <img src="{%static 'zaresapp/vamico/assets/img/img-work-05.jpg'%}" class="img-responsive">
+            </div><!-- .process-item -->
+          </div><!-- .col-## -->
+          <div class="col-md-2 col-sm-4">
+            <div class="process-item highlight text-center">
+              <img src="{%static 'zaresapp/vamico/assets/img/img-work-06.jpg'%}" class="img-responsive">
+            </div><!-- .process-item -->
+          </div><!-- .col-## -->
+        </div><!-- .row -->
+
+      </div><!-- .container -->
+    </div><!-- #why -->
+    <!-- end:why -->
+
+      
+
+    <!-- begin:additional-info -->
+    <div id="contact" class="additional-info block-section bg-white padd-20-top padd-40-btm">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa fa-phone"></i>
+              </div><!-- .contact-item-icon -->
+              <h4 class="contact-item-title">Número de teléfono:</h4>
+              <div class="contact-item-info">+52-55-5445-1880</div>
+              <div class="contact-item-info">+52-55-5697-9711</div>
+            </div><!-- .contact-item -->
+          </div><!-- .col-# -->
+
+          <div class="col-md-3 col-sm-6">
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa fa-envelope-o"></i>
+              </div><!-- .contact-item-icon -->
+              <h4 class="contact-item-title">Correo electrónico:</h4>
+              <div class="contact-item-info">info@vamicomx.com</div>
+            </div><!-- .contact-item -->
+          </div><!-- .col-# -->
+          
+          <div class="col-md-3 col-sm-6">
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa fa-map-marker"></i>
+              </div><!-- .contact-item-icon -->
+              <h4 class="contact-item-title">Dirección:</h4>
+              <div class="contact-item-info">Cuicacalli Mzna 23 Lote 1</div>
+              <div class="contact-item-info">Estrella del Sur, Iztapalapa</div>
+              <div class="contact-item-info">CP 09820, CDMX, MÉXICO</div>
+            </div><!-- .contact-item -->
+          </div><!-- .col-# -->
+
+          <div class="col-md-3 col-sm-6">
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </div><!-- .contact-item-icon -->
+              <h4 class="contact-item-title">Horaios:</h4>
+              <div class="contact-item-info">Lun - Vie: 9:00 am - 6:00 pm </div>
+            </div><!-- .contact-item -->
+          </div><!-- .col-# -->
+        </div><!-- .row -->
+      </div><!-- container -->
+    </div><!-- #additional-info -->
+    <!-- end:additional-info -->
+
+    <!-- begin:contact -->
+    <div id="" class="contact image-block">
+      <div class="container-fluid container-no-padding">
+        <div class="row row-no-margin">
+          <div class="image-block-item col-md-6 col-sm-5 col-xs-12">
+            <div class="image-block-item-background image-block-item-map" data-lat="19.3487072" data-lng="-99.1032705"></div>
+          </div><!-- .image-block-item -->
+        </div><!-- .row -->
+      </div><!-- .container-fluid -->
+      <div class="container clear">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-10 col-xs-offset-1 padd-20-top padd-60-btm">
+            <h2>CONTACTO</h2>
+            <p>Ingresa tus datos, nos pondremos en contacto contigo a la brevedad.</p>
+            <form class="contact-form">
+              <div class="form-group">
+                <label for="contact_name">Nombre</label>
+                <input type="text" class="form-control form-bordered" id="contact_name">
+              </div>
+              <div class="form-group">
+                <label for="contact_email" class="form-label">Email</label>
+                <input type="email" class="form-control form-bordered" id="contact_email">
+              </div>
+              <div class="form-group">
+                <label for="contact_message" class="form-label">Mensaje</label>
+                <textarea class="form-control form-bordered" rows="6" id="contact_message"></textarea>
+              </div>
+              <button type="submit" class="button btn-squar btn-roundede">Enviar Mensaje</button>
+            </form><!-- .contact-form -->
+          </div><!-- .col-## -->
+        </div><!-- .row -->
+      </div><!-- .container -->
+    </div><!-- #contact -->
+    <!-- end:contact -->
+
+    
+
+    <div id="facts" class="facts content-section bg-theme">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <div class="fact-item">
+                <span class="fact-item-number">
+                  <span class="number number-alt">26+</span>
+                </span>
+                <h5 class="fact-item-info">AÑOS DE EXPERIENCIA</h5>
+              </div><!-- .fact-item -->
+            </div><!-- .col-## -->
+
+            <div class="col-md-4 col-sm-6">
+              <div class="fact-item">
+                <span class="fact-item-number">
+                  <span class="number">35+</span>
+                </span>
+                <h5 class="fact-item-info">CLIENTES SATISFECHOS</h5>
+              </div><!-- .fact-item -->
+            </div><!-- .col-## -->
+
+            <div class="col-md-4 col-sm-6">
+              <div class="fact-item">
+                <span class="fact-item-number">
+                  <span class="number">68+</span>
+                </span>
+                <h5 class="fact-item-info">PROYECTOS TERMINADOS</h5>
+              </div><!-- .fact-item -->
+            </div><!-- .col-## -->
+          </div><!-- .row -->
+        </div><!-- container -->
+      </div>
+
+    <!-- begin:footer -->
+    <footer id="nosotros" class="site-footer bg-black" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <h2 class="text-center">SOBRE NOSOTROS</h2>
           <div class="col-md-7 col-sm-6">
             <section class="widget">
-              <img src="{%static 'zaresapp/vamico/assets/img/img-logo.png'%}" style="max-width:100px" alt="bootstrap theme for construction companies" class="img-responsive marg-20-btm marg-20-top">
+              <img src="{%static 'zaresapp/vamico/assets/img/img-logo.png'%}" style="max-width:140px" alt="bootstrap theme for construction companies" class="img-responsive marg-20-btm marg-20-top">
               <p>Vamico S.A. de C.V. siempre ha buscado combinar una infraestructura de alta calidad y experiencia en su equipo de ingenieros y ejecutivos con el fin de poner a disposición del cliente un servicio de calidad superior para ofrecer productos de acuerdo a las especificaciones local / mexicana que las empresas gubernamentales han emitido. 
 
               <br />Todas las marcas representadas por Vamico S.A. de C.V. cuentan con ISO 9001.</p>
+              <hr />
+
+              <h3 style="margin-bottom:20px;">Te gustaria saber mas de nosotros?</h3>
+              <a style="margin-bottom:20px;background-color: #c7882e;border-color: #c7882e;color:#fff" class="btn btn-warning btn-md btn-outline" href="{%static 'zaresapp/vamico/assets/docs/CV-Vamico.docx'%}" download>Descargar CV de la empresa</a>
+
+              
+
             </section><!-- .widget -->
           </div><!-- .col-## -->
 
@@ -902,11 +1058,14 @@
             <div id="testimonial" class="block-section image-block bg-white">
               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-12.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -990,11 +1149,14 @@
             <div id="testimonial" class="block-section image-block bg-white">
               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-13.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -1083,11 +1245,14 @@
             <div id="testimonial" class="block-section image-block bg-white">
               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-14.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -1168,11 +1333,14 @@
             <div id="testimonial" class="block-section image-block bg-white">
               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-15.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -1251,11 +1419,14 @@
             <div id="testimonial" class="block-section image-block bg-white">
               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-16.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -1561,11 +1732,14 @@
             <div id="testimonial" class="block-section image-block bg-white">
               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-17.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <p>
                       El diseño de la válvula de triple excentricidad cuenta con una geometría única para evitar los típicos problemas asociados con el diseño de válvulas de mariposa de alto rendimiento. La geometría del conjunto triple elimina totalmente el rozamiento entre el anillo de sello montado en el disco de la válvula y el asiento del cuerpo durante la carrera completa de cierre o apertura de la válvula.
                     </p>
@@ -1888,13 +2062,16 @@
           <div class="modal-body">
            <!-- begin:testimonial -->
             <div id="testimonial" class="block-section image-block bg-white">
-              <div class="container-fluid container-no-padding">
+               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-19.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -1990,13 +2167,16 @@
           <div class="modal-body">
            <!-- begin:testimonial -->
             <div id="testimonial" class="block-section image-block bg-white">
-              <div class="container-fluid container-no-padding">
+               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-20.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -2070,13 +2250,16 @@
           <div class="modal-body">
            <!-- begin:testimonial -->
             <div id="testimonial" class="block-section image-block bg-white">
-              <div class="container-fluid container-no-padding">
+             <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-21.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -2159,11 +2342,14 @@
             <div id="testimonial" class="block-section image-block bg-white">
               <div class="container-fluid container-no-padding">
                 <div class="row row-no-margin">
+                  <div class="image-block-item col-md-6 col-md-offset-6 col-sm-5 col-xs-12">
+                    <div class="image-block-item-background" style="background-image: url('{%static 'zaresapp/vamico/assets/img/img-service-01-22.jpg'%}');"></div>
+                  </div><!-- .image-block-item -->
                 </div><!-- .row -->
               </div><!-- .container-fluid -->
               <div class="container clear">
                 <div class="row">
-                  <div class="col-md-10 col-md-offset-0 col-sm-11 padd-20-top padd-100-btm">
+                  <div class="col-md-5 col-md-offset-0 col-sm-7 col-sm-offset-5 padd-20-top padd-100-btm">
                     <h2 class="marg-40-btm text-center">TABLA TÉCNICA</h2>
                     <table class="table table-hover">
                       <tbody>
@@ -2555,5 +2741,20 @@
     <script src="{%static 'zaresapp/vamico/assets/plugins/gmap3.min.js'%}"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtR223ih2ZwVJX2SGBixD3p87Aa8RV2Is"></script>
     <script src="{%static 'zaresapp/vamico/assets/js/script.min.js'%}"></script>
+
+    <script type="text/javascript" charset="utf-8" async defer>
+
+    
+
+    function init_map() {
+    var a = $(".map, .image-block-item-map"),
+        b = a.attr("data-lat"),
+        c = a.attr("data-lng"); "" == b && null == b && (b = 33.7955454), "" == c && null == b && (c = -117.8282586);
+    var d = { lat: +b, lng: +c };
+    $(".map, .image-block-item-map").gmap3({ center: d, zoom: 12, zoomControl: !0, zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL }, zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER }, scrollwheel: !1, mapTypeControl: !1, streetViewControl: !1, draggable: !0, styles: [{ elementType: "geometry", stylers: [{ color: "#f5f5f5" }] }, { elementType: "labels.icon", stylers: [{ visibility: "off" }] }, { elementType: "labels.text.fill", stylers: [{ color: "#616161" }] }, { elementType: "labels.text.stroke", stylers: [{ color: "#f5f5f5" }] }, { featureType: "administrative.land_parcel", elementType: "labels.text.fill", stylers: [{ color: "#bdbdbd" }] }, { featureType: "poi", elementType: "geometry", stylers: [{ color: "#eeeeee" }] }, { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] }, { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] }, { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] }, { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] }, { featureType: "road.arterial", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] }, { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#dadada" }] }, { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] }, { featureType: "road.local", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] }, { featureType: "transit.line", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] }, { featureType: "transit.station", elementType: "geometry", stylers: [{ color: "#eeeeee" }] }, { featureType: "water", elementType: "geometry", stylers: [{ color: "#c9c9c9" }] }, { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] }] }).marker({ position: d, options: { icon: "{%static 'zaresapp/vamico/assets/img/map-marker.png'%}" } }) }
+
+
+
+    </script>
   </body>
 </html>
